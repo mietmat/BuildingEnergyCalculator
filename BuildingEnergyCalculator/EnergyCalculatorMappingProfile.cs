@@ -9,8 +9,10 @@ namespace BuildingEnergyCalculator
         public EnergyCalculatorMappingProfile()
         {
             CreateMap<BuildingMaterial, BuildingMaterialDto>().ReverseMap();
-            
-           
+            CreateMap<BuildingMaterial, CreateBuldingMaterialDto>().ReverseMap();
+
+
+
         }
     }
 }
