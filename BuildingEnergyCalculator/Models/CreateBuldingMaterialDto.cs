@@ -9,5 +9,6 @@
         public double Ro { get; set; }
         public double Cw { get; set; }
 
+
     }
 }

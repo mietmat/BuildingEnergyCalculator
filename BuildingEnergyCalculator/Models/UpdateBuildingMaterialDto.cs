@@ -12,5 +12,7 @@ namespace BuildingEnergyCalculator.Models
         public double GammaW { get; set; }
         public double Ro { get; set; }
         public double Cw { get; set; }
+        public int DivisionalStructureId { get; set; }
+
     }
 }
