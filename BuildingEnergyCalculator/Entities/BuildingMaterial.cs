@@ -9,6 +9,7 @@
         public double GammaW { get; set; }
         public double Ro { get; set; }
         public double Cw { get; set; }
+        public double LayerThickness { get; set; }
 
 
     }

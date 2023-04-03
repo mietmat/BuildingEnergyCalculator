@@ -17,7 +17,7 @@ namespace BuildingEnergyCalculator
             if (_dbContext.Database.CanConnect())
             {
                 var pendingMigrations = _dbContext.Database.GetPendingMigrations();//not implemented migration list
-                if (pendingMigrations !=null && pendingMigrations.Any())
+                if (pendingMigrations != null && pendingMigrations.Any())
                 {
                     _dbContext.Database.Migrate();
 
@@ -62,8 +62,8 @@ namespace BuildingEnergyCalculator
 
         private IEnumerable<BuildingMaterial> GetBuildingMaterials()
         {
-            var buildingMaterials = new List<BuildingMaterial>() 
-            { 
+            var buildingMaterials = new List<BuildingMaterial>()
+            {
                 new BuildingMaterial()
                 {
                     Name="Aluminium",
@@ -72,6 +72,8 @@ namespace BuildingEnergyCalculator
                     GammaW=200,
                     Ro=2700,
                     Cw=0.87
+                    
+
                 },
                 new BuildingMaterial()
                 {
@@ -81,6 +83,9 @@ namespace BuildingEnergyCalculator
                     GammaW=0.6,
                     Ro=1200,
                     Cw=0.84
+
+
+
                 },
                 new BuildingMaterial()
                 {
@@ -90,6 +95,8 @@ namespace BuildingEnergyCalculator
                     GammaW=0.3,
                     Ro=500,
                     Cw=0.84
+
+
                 },
                 new BuildingMaterial()
                 {
@@ -99,6 +106,7 @@ namespace BuildingEnergyCalculator
                     GammaW=0.43,
                     Ro=1000,
                     Cw=0.84
+
                 },
                 new BuildingMaterial()
                 {
@@ -108,6 +116,7 @@ namespace BuildingEnergyCalculator
                     GammaW=0.05,
                     Ro=80,
                     Cw=0.84
+
                 },
                 new BuildingMaterial()
                 {
@@ -117,13 +126,31 @@ namespace BuildingEnergyCalculator
                     GammaW=0.7,
                     Ro=1400,
                     Cw=0.88
+
                 },
 
 
             };
-
             return buildingMaterials;
+        }
 
+        private IEnumerable<DivisionalStructure> GetDivisionalStructure()
+        {
+            var divisionalStructure = new List<DivisionalStructure>()
+            {
+                new DivisionalStructure()
+                {
+                    Description="ściana wewnętrzna",
+                    DivisionalThickness=0.016,
+                    λ=1,
+                    R=1,
+                    U=1,
+                    Rse=1,
+                    Rsi = 1
+                }
+             };
+
+            return divisionalStructure;
         }
     }
 }

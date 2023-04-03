@@ -10,6 +10,10 @@ namespace BuildingEnergyCalculator
         {
             CreateMap<BuildingMaterial, BuildingMaterialDto>().ReverseMap();
             CreateMap<BuildingMaterial, CreateBuldingMaterialDto>().ReverseMap();
+            CreateMap<BuildingMaterial, UpdateBuildingMaterialDto>().ReverseMap();
+            CreateMap<DivisionalStructure, CreateDivisionalStructureDto>().ReverseMap();
+            CreateMap<DivisionalStructure, UpdateDivisionalStructureDto>().ReverseMap();
+            CreateMap<DivisionalStructure, DivisionalStructureDto>().ReverseMap();
 
 
 

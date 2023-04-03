@@ -10,9 +10,9 @@ namespace BuildingEnergyCalculator.Entities
         
         }
         public DbSet<BuildingMaterial> BuildingMaterials { get; set; }
+        public DbSet<DivisionalStructure> DivisionalStructures { get; set; }
         public DbSet<Role> Roles { get; set; }
-
-
+              
 
     }
 }

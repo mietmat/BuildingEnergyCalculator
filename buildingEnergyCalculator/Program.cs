@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EnergyCalculatorDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EnergyCalculatorDbConnection")));
 builder.Services.AddScoped<EnergyCalculatorSeeder>();
 builder.Services.AddScoped<IBuildingMaterialService, BuildingMaterialService>();
+builder.Services.AddScoped<IDivisionalStructureService, DivisionalStructureService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddSwaggerGen(c =>

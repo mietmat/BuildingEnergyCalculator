@@ -11,12 +11,9 @@ namespace BuildingEnergyCalculator.Controllers
     public class BuildingMaterialController : ControllerBase
     {
         private readonly IBuildingMaterialService _buildingMaterialService;
-        private readonly EnergyCalculatorDbContext _dbContext;
-        public BuildingMaterialController(IBuildingMaterialService buildingMaterialService,
-            EnergyCalculatorDbContext dbContext)
+        public BuildingMaterialController(IBuildingMaterialService buildingMaterialService)
         {
             _buildingMaterialService = buildingMaterialService;
-            _dbContext = dbContext;
         }
 
         [HttpPost]
