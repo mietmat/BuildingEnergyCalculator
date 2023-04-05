@@ -35,7 +35,10 @@ namespace BuildingEnergyCalculator.Services
 
         public IEnumerable<DivisionalStructureDto> GetAll()
         {
-            throw new NotImplementedException();
+            var divisionalStructures = _dbContext.DivisionalStructures.ToList();
+            var divisionalStructuresDtos = _mapper.Map<List<DivisionalStructureDto>>(divisionalStructures);
+
+            return divisionalStructuresDtos;
         }
 
         public DivisionalStructureDto GetById(int id)

@@ -142,7 +142,6 @@ namespace BuildingEnergyCalculator
                 {
                     Description="ściana wewnętrzna",
                     DivisionalThickness=0.016,
-                    λ=1,
                     R=1,
                     U=1,
                     Rse=1,
