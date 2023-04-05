@@ -13,6 +13,7 @@ namespace BuildingEnergyCalculator.Models
         public double Ro { get; set; }
         public double Cw { get; set; }
         public int DivisionalStructureId { get; set; }
+        public double Thickness { get; set; }
 
     }
 }

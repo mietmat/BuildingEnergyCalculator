@@ -24,6 +24,14 @@ namespace BuildingEnergyCalculator.Controllers
             return Created($"/api/material/{id}", null);
         }
 
-        
+        [HttpGet]
+        //[Authorize(Roles = "Admin,Manager")]
+        public ActionResult<IEnumerable<DivisionalStructureDto>> GetAll()
+        {
+            var divisionalStructureDto = _idivisionalStructureService.GetAll();
+            return Ok(divisionalStructureDto);
+        }
+
+
     }
 }

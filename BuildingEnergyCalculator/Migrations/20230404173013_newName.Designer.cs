@@ -4,6 +4,7 @@ using BuildingEnergyCalculator.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingEnergyCalculator.Migrations
 {
     [DbContext(typeof(EnergyCalculatorDbContext))]
-    partial class EnergyCalculatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230404173013_newName")]
+    partial class newName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,10 +80,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("DivisionalThickness")
                         .HasColumnType("float");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("R")
                         .HasColumnType("float");
 
@@ -92,6 +90,9 @@ namespace BuildingEnergyCalculator.Migrations
                         .HasColumnType("float");
 
                     b.Property<double>("U")
+                        .HasColumnType("float");
+
+                    b.Property<double>("λ")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
