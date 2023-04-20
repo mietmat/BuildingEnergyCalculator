@@ -1,4 +1,6 @@
-﻿namespace BuildingEnergyCalculator.Models
+﻿using BuildingEnergyCalculator.Entities;
+
+namespace BuildingEnergyCalculator.Models
 {
     public class CreateBuldingMaterialDto
     {

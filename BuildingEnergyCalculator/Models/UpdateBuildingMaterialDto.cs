@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BuildingEnergyCalculator.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
@@ -14,6 +15,7 @@ namespace BuildingEnergyCalculator.Models
         public double Cw { get; set; }
         public int DivisionalStructureId { get; set; }
         public double Thickness { get; set; }
+
 
     }
 }

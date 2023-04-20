@@ -1,8 +1,9 @@
-﻿namespace BuildingEnergyCalculator.Models
+﻿using BuildingEnergyCalculator.Entities;
+
+namespace BuildingEnergyCalculator.Models
 {
     public class BuildingMaterialDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double GammaSW { get; set; }
