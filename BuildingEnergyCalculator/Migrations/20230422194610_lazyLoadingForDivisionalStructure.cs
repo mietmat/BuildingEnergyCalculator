@@ -4,7 +4,7 @@
 
 namespace BuildingEnergyCalculator.Migrations
 {
-    public partial class removedDivisionalStr : Migration
+    public partial class lazyLoadingForDivisionalStructure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

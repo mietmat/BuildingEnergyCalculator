@@ -22,7 +22,7 @@ namespace BuildingEnergyCalculator.Services
             _dbContext.BuildingMaterials.Add(buildingMaterial);
             _dbContext.SaveChanges();
 
-            return buildingMaterial.Id;
+            return default;
         }
 
         public void Delete(int id)
@@ -53,7 +53,7 @@ namespace BuildingEnergyCalculator.Services
 
             var buildingMaterialDto = _mapper.Map<BuildingMaterialDto>(buildingMaterial);
 
-            return buildingMaterialDto;
+            return default;
         }
 
         public void Update(UpdateBuildingMaterialDto dto, int id)

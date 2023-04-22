@@ -7,6 +7,7 @@ namespace BuildingEnergyCalculator.Models
 {
     public class UpdateBuildingMaterialDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double GammaSW { get; set; }
@@ -15,6 +16,7 @@ namespace BuildingEnergyCalculator.Models
         public double Cw { get; set; }
         public int DivisionalStructureId { get; set; }
         public double Thickness { get; set; }
+
 
 
     }

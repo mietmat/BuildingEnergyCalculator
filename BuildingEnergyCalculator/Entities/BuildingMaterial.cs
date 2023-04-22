@@ -5,8 +5,6 @@ namespace BuildingEnergyCalculator.Entities
 {
     public class BuildingMaterial
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,7 +12,10 @@ namespace BuildingEnergyCalculator.Entities
         public double GammaW { get; set; }
         public double Ro { get; set; }
         public double Cw { get; set; }
-        public double Thickness { get; set; }        
+        public double Thickness { get; set; }
+        public virtual List<DivisionalStructure> DivisionalStructures { get; set; }
+
+
 
     }
 }

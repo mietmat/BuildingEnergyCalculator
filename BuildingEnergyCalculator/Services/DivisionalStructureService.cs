@@ -35,9 +35,8 @@ namespace BuildingEnergyCalculator.Services
 
         public IEnumerable<DivisionalStructureDto> GetAll()
         {
-            var divisionalStructures = _dbContext.DivisionalStructures.ToList();
+            var divisionalStructures = _dbContext.DivisionalStructures.Include(ds=>ds.BuildingMaterials).ToList();
             var divisionalStructuresDtos = _mapper.Map<List<DivisionalStructureDto>>(divisionalStructures);
-
             return divisionalStructuresDtos;
         }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingEnergyCalculator.Migrations
 {
     [DbContext(typeof(EnergyCalculatorDbContext))]
-    [Migration("20230420184004_addIdenetityOption")]
-    partial class addIdenetityOption
+    [Migration("20230422194610_lazyLoadingForDivisionalStructure")]
+    partial class lazyLoadingForDivisionalStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,9 +39,6 @@ namespace BuildingEnergyCalculator.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DivisionalStructureId")
-                        .HasColumnType("int");
-
                     b.Property<double>("GammaSW")
                         .HasColumnType("float");
 
@@ -60,9 +57,22 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DivisionalStructureId");
-
                     b.ToTable("BuildingMaterials");
+                });
+
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterialDivisionalStructure", b =>
+                {
+                    b.Property<int>("DivisionalStructureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuildingMaterialId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DivisionalStructureId", "BuildingMaterialId");
+
+                    b.HasIndex("BuildingMaterialId");
+
+                    b.ToTable("BuildingMaterialDivisionalStructures");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.DivisionalStructure", b =>
@@ -171,11 +181,23 @@ namespace BuildingEnergyCalculator.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterial", b =>
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterialDivisionalStructure", b =>
                 {
-                    b.HasOne("BuildingEnergyCalculator.Entities.DivisionalStructure", null)
-                        .WithMany("BuildingMaterials")
-                        .HasForeignKey("DivisionalStructureId");
+                    b.HasOne("BuildingEnergyCalculator.Entities.BuildingMaterial", "BuildingMaterial")
+                        .WithMany()
+                        .HasForeignKey("BuildingMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BuildingEnergyCalculator.Entities.DivisionalStructure", "DivisionalStructure")
+                        .WithMany()
+                        .HasForeignKey("DivisionalStructureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BuildingMaterial");
+
+                    b.Navigation("DivisionalStructure");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.User", b =>
@@ -187,11 +209,6 @@ namespace BuildingEnergyCalculator.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("BuildingEnergyCalculator.Entities.DivisionalStructure", b =>
-                {
-                    b.Navigation("BuildingMaterials");
                 });
 #pragma warning restore 612, 618
         }
