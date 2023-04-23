@@ -1,5 +1,6 @@
 using AutoMapper;
 using BuildingEnergyCalculator;
+using BuildingEnergyCalculator.Calculator;
 using BuildingEnergyCalculator.Entities;
 using BuildingEnergyCalculator.Models;
 using BuildingEnergyCalculator.Models.Validators;
@@ -58,6 +59,8 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IDivisionalStructureCalc, DivisionalStructureCalc>();
+builder.Services.AddScoped<IBuildingMaterialCalc, BuildingMaterialCalc>();
 builder.Services.AddHttpContextAccessor();
 
 

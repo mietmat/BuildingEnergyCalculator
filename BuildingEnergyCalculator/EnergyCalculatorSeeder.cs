@@ -68,8 +68,8 @@ namespace BuildingEnergyCalculator
                 {
                     Name="Aluminium",
                     Description="AL",
-                    GammaSW=200,
-                    GammaW=200,
+                    LambdaSW=200,
+                    LambdaW=200,
                     Ro=2700,
                     Cw=0.87
                     
@@ -79,8 +79,8 @@ namespace BuildingEnergyCalculator
                 {
                     Name="Beton",
                     Description="beton z kruszywa kamiennego - 1200",
-                    GammaSW=0.5,
-                    GammaW=0.6,
+                    LambdaSW=0.5,
+                    LambdaW=0.6,
                     Ro=1200,
                     Cw=0.84
 
@@ -91,8 +91,8 @@ namespace BuildingEnergyCalculator
                 {
                     Name="Beton komórkowy",
                     Description="ściana z bloczków z betonu komórkowego - 500",
-                    GammaSW=0.25,
-                    GammaW=0.3,
+                    LambdaSW=0.25,
+                    LambdaW=0.3,
                     Ro=500,
                     Cw=0.84
 
@@ -102,8 +102,8 @@ namespace BuildingEnergyCalculator
                 {
                     Name="Beton z kruszywa keramzytowego",
                     Description="beton z kruszywa keramzytowego 1000",
-                    GammaSW=0.39,
-                    GammaW=0.43,
+                    LambdaSW=0.39,
+                    LambdaW=0.43,
                     Ro=1000,
                     Cw=0.84
 
@@ -112,8 +112,8 @@ namespace BuildingEnergyCalculator
                 {
                     Name="Maty z włókna szklanego",
                     Description="",
-                    GammaSW=0.045,
-                    GammaW=0.05,
+                    LambdaSW=0.045,
+                    LambdaW=0.05,
                     Ro=80,
                     Cw=0.84
 
@@ -122,8 +122,8 @@ namespace BuildingEnergyCalculator
                 {
                     Name="Cegła dziurawka",
                     Description="mur z cegły dziurawki 120x250x65",
-                    GammaSW=0.64,
-                    GammaW=0.7,
+                    LambdaSW=0.64,
+                    LambdaW=0.7,
                     Ro=1400,
                     Cw=0.88
 
@@ -142,7 +142,7 @@ namespace BuildingEnergyCalculator
                 {
                     Description="ściana wewnętrzna",
                     DivisionalThickness=0.016,
-                    R=1,
+                    RSum=1,
                     U=1,
                     Rse=1,
                     Rsi = 1
