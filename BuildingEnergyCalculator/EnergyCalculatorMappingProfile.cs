@@ -14,7 +14,7 @@ namespace BuildingEnergyCalculator
             CreateMap<DivisionalStructure, CreateDivisionalStructureDto>().ReverseMap();
             CreateMap<DivisionalStructure, UpdateDivisionalStructureDto>().ReverseMap();
             CreateMap<DivisionalStructure, DivisionalStructureDto>().ReverseMap();
-
+                
 
 
         }

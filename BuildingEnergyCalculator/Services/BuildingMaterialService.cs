@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BuildingEnergyCalculator.Calculator;
 using BuildingEnergyCalculator.Entities;
 using BuildingEnergyCalculator.Exceptions;
 using BuildingEnergyCalculator.Models;
@@ -10,19 +11,23 @@ namespace BuildingEnergyCalculator.Services
     {
         private readonly EnergyCalculatorDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IBuildingMaterialCalc _buildingMaterialCalc;
         public BuildingMaterialService(EnergyCalculatorDbContext dbContext,
-            IMapper mapper)
+            IMapper mapper,IBuildingMaterialCalc buildingMaterialCalc)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _buildingMaterialCalc = buildingMaterialCalc;
         }
         public int Create(CreateBuldingMaterialDto dto)
         {
+            _buildingMaterialCalc.CalculateR(dto);
+
             var buildingMaterial = _mapper.Map<BuildingMaterial>(dto);
             _dbContext.BuildingMaterials.Add(buildingMaterial);
             _dbContext.SaveChanges();
 
-            return buildingMaterial.Id;
+            return default;
         }
 
         public void Delete(int id)
@@ -53,7 +58,7 @@ namespace BuildingEnergyCalculator.Services
 
             var buildingMaterialDto = _mapper.Map<BuildingMaterialDto>(buildingMaterial);
 
-            return buildingMaterialDto;
+            return default;
         }
 
         public void Update(UpdateBuildingMaterialDto dto, int id)
@@ -66,8 +71,8 @@ namespace BuildingEnergyCalculator.Services
             buildingMaterial.Name = dto.Name;
             buildingMaterial.Description = dto.Description;
             buildingMaterial.Cw = dto.Cw;
-            buildingMaterial.GammaSW = dto.GammaSW;
-            buildingMaterial.GammaW = dto.GammaW;
+            buildingMaterial.LambdaSW = dto.LambdaSW;
+            buildingMaterial.LambdaW = dto.LambdaW;
             buildingMaterial.Ro = dto.Ro;
 
             _dbContext.SaveChanges();

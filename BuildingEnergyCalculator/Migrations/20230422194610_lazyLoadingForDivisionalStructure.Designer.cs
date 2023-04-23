@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingEnergyCalculator.Migrations
 {
     [DbContext(typeof(EnergyCalculatorDbContext))]
-    [Migration("20230404175629_addedProperty")]
-    partial class addedProperty
+    [Migration("20230422194610_lazyLoadingForDivisionalStructure")]
+    partial class lazyLoadingForDivisionalStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,9 +39,6 @@ namespace BuildingEnergyCalculator.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DivisionalStructureId")
-                        .HasColumnType("int");
-
                     b.Property<double>("GammaSW")
                         .HasColumnType("float");
 
@@ -60,9 +57,22 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DivisionalStructureId");
-
                     b.ToTable("BuildingMaterials");
+                });
+
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterialDivisionalStructure", b =>
+                {
+                    b.Property<int>("DivisionalStructureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuildingMaterialId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DivisionalStructureId", "BuildingMaterialId");
+
+                    b.HasIndex("BuildingMaterialId");
+
+                    b.ToTable("BuildingMaterialDivisionalStructures");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.DivisionalStructure", b =>
@@ -96,9 +106,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("U")
                         .HasColumnType("float");
 
-                    b.Property<double>("λ")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.ToTable("DivisionalStructures");
@@ -121,16 +128,87 @@ namespace BuildingEnergyCalculator.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterial", b =>
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.User", b =>
                 {
-                    b.HasOne("BuildingEnergyCalculator.Entities.DivisionalStructure", null)
-                        .WithMany("BuildingMaterials")
-                        .HasForeignKey("DivisionalStructureId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpireTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ResetPasswordExpiry")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResetPasswordToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BuildingEnergyCalculator.Entities.DivisionalStructure", b =>
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterialDivisionalStructure", b =>
                 {
-                    b.Navigation("BuildingMaterials");
+                    b.HasOne("BuildingEnergyCalculator.Entities.BuildingMaterial", "BuildingMaterial")
+                        .WithMany()
+                        .HasForeignKey("BuildingMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BuildingEnergyCalculator.Entities.DivisionalStructure", "DivisionalStructure")
+                        .WithMany()
+                        .HasForeignKey("DivisionalStructureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BuildingMaterial");
+
+                    b.Navigation("DivisionalStructure");
+                });
+
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.User", b =>
+                {
+                    b.HasOne("BuildingEnergyCalculator.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }
