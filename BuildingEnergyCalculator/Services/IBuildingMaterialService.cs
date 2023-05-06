@@ -9,6 +9,6 @@ namespace BuildingEnergyCalculator.Services
         IEnumerable<BuildingMaterialDto> GetAll();
         BuildingMaterialDto GetById(int id);
         void Delete(int id);
-        void Update(UpdateBuildingMaterialDto dto,int id);
+        BuildingMaterialDto Update(UpdateBuildingMaterialDto dto,int id);
     }
 }

@@ -47,7 +47,7 @@ namespace BuildingEnergyCalculator.Services
             var buildingMaterials = _dbContext.BuildingMaterials.ToList();
             var buildingMaterialsDtos = _mapper.Map<List<BuildingMaterialDto>>(buildingMaterials);
             return buildingMaterialsDtos;
-        }
+        }       
 
         public BuildingMaterialDto GetById(int id)
         {
@@ -61,7 +61,7 @@ namespace BuildingEnergyCalculator.Services
             return default;
         }
 
-        public void Update(UpdateBuildingMaterialDto dto, int id)
+        public BuildingMaterialDto Update(UpdateBuildingMaterialDto dto, int id)
         {
             var buildingMaterial = _dbContext.BuildingMaterials.FirstOrDefault(x => x.Id == id);
             if (buildingMaterial is null)
@@ -74,8 +74,13 @@ namespace BuildingEnergyCalculator.Services
             buildingMaterial.LambdaSW = dto.LambdaSW;
             buildingMaterial.LambdaW = dto.LambdaW;
             buildingMaterial.Ro = dto.Ro;
+            buildingMaterial.Thickness = dto.Thickness;
 
             _dbContext.SaveChanges();
+            var buildingMaterialDto = _mapper.Map<BuildingMaterialDto>(buildingMaterial);
+
+
+            return buildingMaterialDto;
 
         }
     }

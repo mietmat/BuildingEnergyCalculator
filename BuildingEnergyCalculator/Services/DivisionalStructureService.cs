@@ -35,8 +35,8 @@ namespace BuildingEnergyCalculator.Services
             var U = _divisionalStructureCalc.CalculateU(dto.RSum);
             dto.U = U;
 
-            var divisionalStructureEntity = _mapper.Map<DivisionalStructure>(dto);           
-            divisionalStructureEntity.BuildingMaterials.Clear();
+            var divisionalStructureEntity = _mapper.Map<DivisionalStructure>(dto);         
+            //divisionalStructureEntity.BuildingMaterials.Clear();
 
             _dbContext.DivisionalStructures.Add(divisionalStructureEntity);
             _dbContext.SaveChanges();
@@ -47,7 +47,11 @@ namespace BuildingEnergyCalculator.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var itemToRemove = _dbContext.DivisionalStructures.FirstOrDefault(x => x.Id == id);
+            _dbContext.Remove(itemToRemove);
+
+            _dbContext.SaveChanges();
+
         }
 
         public IEnumerable<DivisionalStructureDto> GetAll()
@@ -94,7 +98,23 @@ namespace BuildingEnergyCalculator.Services
 
         public void Update(UpdateDivisionalStructureDto dto, int id)
         {
-            throw new NotImplementedException();
+            var divisionalStructure = _dbContext.DivisionalStructures.FirstOrDefault(x => x.Id == id);
+            if (divisionalStructure is null)
+                throw new NotFoundException("Material not found");
+
+            var divisionalStructureEntity = _mapper.Map<DivisionalStructure>(dto);
+
+            divisionalStructure.Id = id;
+            divisionalStructure.Name = divisionalStructureEntity.Name;
+            divisionalStructure.Description = divisionalStructureEntity.Description;
+            divisionalStructure.Rsi = divisionalStructureEntity.Rsi;
+            divisionalStructure.Rse = divisionalStructureEntity.Rse;
+
+            divisionalStructure.BuildingMaterials = divisionalStructureEntity.BuildingMaterials;
+            divisionalStructure.DivisionalThickness = _divisionalStructureCalc.CalculateThickness(dto.BuildingMaterials);
+
+
+            _dbContext.SaveChanges();
         }
     }
 }

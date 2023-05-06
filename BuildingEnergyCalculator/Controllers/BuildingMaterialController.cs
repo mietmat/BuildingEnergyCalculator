@@ -32,9 +32,14 @@ namespace BuildingEnergyCalculator.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<BuildingMaterialDto> Get([FromRoute] int id)
+        public ActionResult<BuildingMaterialDto> GetItem([FromRoute] int id)
         {
             var buildingMaterial = _buildingMaterialService.GetById(id);
+
+            if (buildingMaterial is null)
+            {
+                return NotFound();
+            }
 
             return Ok(buildingMaterial);
         }
@@ -49,7 +54,16 @@ namespace BuildingEnergyCalculator.Controllers
         [HttpPut("{id}")]
         public ActionResult Update([FromBody] UpdateBuildingMaterialDto dto, [FromRoute] int id)
         {
+            var existingMaterial = _buildingMaterialService.GetById(id);
+
+
+            if (existingMaterial is null)
+            {
+                return NotFound();
+            }
+
             _buildingMaterialService.Update(dto, id);
+
             return Ok();
         }
     }
