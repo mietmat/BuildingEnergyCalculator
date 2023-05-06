@@ -5,7 +5,7 @@ namespace BuildingEnergyCalculator.Calculator
 {
     public class BuildingMaterialCalc : IBuildingMaterialCalc
     {
-        void IBuildingMaterialCalc.CalculateR(CreateBuldingMaterialDto buildingMaterialDto)
+        void IBuildingMaterialCalc.CalculateR(CreateBuildingMaterialDto buildingMaterialDto)
         {
             buildingMaterialDto.R = buildingMaterialDto.Thickness / buildingMaterialDto.LambdaSW;           
         }

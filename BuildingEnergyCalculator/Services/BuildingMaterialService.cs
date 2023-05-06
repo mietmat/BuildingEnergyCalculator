@@ -19,7 +19,7 @@ namespace BuildingEnergyCalculator.Services
             _mapper = mapper;
             _buildingMaterialCalc = buildingMaterialCalc;
         }
-        public int Create(CreateBuldingMaterialDto dto)
+        public int Create(CreateBuildingMaterialDto dto)
         {
             _buildingMaterialCalc.CalculateR(dto);
 

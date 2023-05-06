@@ -18,7 +18,7 @@ namespace BuildingEnergyCalculator.Controllers
 
         [HttpPost]
         //[Authorize(Roles = "Admin,Manager")]
-        public ActionResult CreateBuildingMaterial([FromBody] CreateBuldingMaterialDto dto)
+        public ActionResult CreateBuildingMaterial([FromBody] CreateBuildingMaterialDto dto)
         {
             var id = _buildingMaterialService.Create(dto);
             return Created($"/api/material/{id}", null);
