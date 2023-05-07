@@ -111,7 +111,20 @@ namespace BuildingEnergyCalculator.Services
             divisionalStructure.Rsi = divisionalStructureEntity.Rsi;
             divisionalStructure.Rse = divisionalStructureEntity.Rse;
 
-            divisionalStructure.BuildingMaterials = divisionalStructureEntity.BuildingMaterials;
+            //foreach (var material in dto.BuildingMaterials)
+            //{
+            //    var buildingMaterial = _mapper.Map<BuildingMaterial>(material);
+
+            //    var existingBuildingMaterial = _dbContext.BuildingMaterials.Find(buildingMaterial.Id);
+
+            //    if (existingBuildingMaterial != null)
+            //    {
+            //        divisionalStructureEntity.BuildingMaterials.Add(existingBuildingMaterial);
+            //    }
+
+            //}
+
+            //divisionalStructure.BuildingMaterials = divisionalStructureEntity.BuildingMaterials;
             divisionalStructure.DivisionalThickness = _divisionalStructureCalc.CalculateThickness(dto.BuildingMaterials);
 
 

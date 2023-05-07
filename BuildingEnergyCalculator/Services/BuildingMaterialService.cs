@@ -58,7 +58,7 @@ namespace BuildingEnergyCalculator.Services
 
             var buildingMaterialDto = _mapper.Map<BuildingMaterialDto>(buildingMaterial);
 
-            return default;
+            return buildingMaterialDto;
         }
 
         public BuildingMaterialDto Update(UpdateBuildingMaterialDto dto, int id)
