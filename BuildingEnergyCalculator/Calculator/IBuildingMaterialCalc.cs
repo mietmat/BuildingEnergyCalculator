@@ -4,7 +4,7 @@ namespace BuildingEnergyCalculator.Calculator
 {
     public interface IBuildingMaterialCalc
     {
-        void CalculateR(CreateBuldingMaterialDto buildingMaterialDto);
+        void CalculateR(CreateBuildingMaterialDto buildingMaterialDto);
        
     }
 }

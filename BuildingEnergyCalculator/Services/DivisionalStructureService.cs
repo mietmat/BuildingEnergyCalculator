@@ -4,6 +4,7 @@ using BuildingEnergyCalculator.Entities;
 using BuildingEnergyCalculator.Exceptions;
 using BuildingEnergyCalculator.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -35,48 +36,52 @@ namespace BuildingEnergyCalculator.Services
             var U = _divisionalStructureCalc.CalculateU(dto.RSum);
             dto.U = U;
 
-            var divisionalStructureEntity = _mapper.Map<DivisionalStructure>(dto);           
-            divisionalStructureEntity.BuildingMaterials.Clear();
+            var divisionalStructureEntity = new DivisionalStructure
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                DivisionalThickness = dto.DivisionalThickness,
+                RSum = dto.RSum,
+                U = dto.U,
+                Rsi = dto.Rsi,
+                Rse = dto.Rse,
+                BuildingMaterials = new List<BuildingMaterial>()
+            };
+
+            foreach (var material in dto.BuildingMaterials)
+            {
+                var buildingMaterial = _mapper.Map<BuildingMaterial>(material);
+
+                var existingBuildingMaterial = _dbContext.BuildingMaterials.Find(buildingMaterial.Id);
+
+                if (existingBuildingMaterial != null)
+                {
+                    divisionalStructureEntity.BuildingMaterials.Add(existingBuildingMaterial);
+                }
+
+            }
 
             _dbContext.DivisionalStructures.Add(divisionalStructureEntity);
             _dbContext.SaveChanges();
 
             return divisionalStructureEntity.Id;
+
         }
 
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var itemToRemove = _dbContext.DivisionalStructures.FirstOrDefault(x => x.Id == id);
+            _dbContext.Remove(itemToRemove);
+
+            _dbContext.SaveChanges();
+
         }
 
         public IEnumerable<DivisionalStructureDto> GetAll()
         {
             var divisionalStructures = _dbContext.DivisionalStructures.Include(ds => ds.BuildingMaterials).ToList();
 
-            //var options = new JsonSerializerOptions
-            //{
-            //    ReferenceHandler = ReferenceHandler.Preserve
-            //};
-
-            //var config = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.CreateMap<DivisionalStructure, DivisionalStructureDto>()
-            //        .ForMember(dest => dest.BuildingMaterials, opt => opt.MapFrom(src => src.BuildingMaterials))
-            //        .ForMember(dest => dest.Id, opt => opt.Ignore())
-            //        .ForMember(dest => dest.Name, opt => opt.Ignore())
-            //        .ForMember(dest => dest.Description, opt => opt.Ignore())
-            //        .ForMember(dest => dest.Rse, opt => opt.Ignore())
-            //        .ForMember(dest => dest.Rsi, opt => opt.Ignore())
-            //        .ForMember(dest => dest.DivisionalThickness, opt => opt.Ignore())
-            //        .ForMember(dest => dest.U, opt => opt.Ignore())
-            //        .ForMember(dest => dest.λ, opt => opt.Ignore())
-            //        .ForMember(dest => dest.R, opt => opt.Ignore());
-            //});
-
-            //var mapper = config.CreateMapper();
-
-            //var divisionalStructuresDtos = _mapper.Map<List<DivisionalStructureDto>>(divisionalStructures);
             var divisionalStructuresDtos = JsonConvert.DeserializeObject<List<DivisionalStructureDto>>(
                 JsonConvert.SerializeObject(divisionalStructures, Formatting.None, new JsonSerializerSettings()
                 {
@@ -94,7 +99,36 @@ namespace BuildingEnergyCalculator.Services
 
         public void Update(UpdateDivisionalStructureDto dto, int id)
         {
-            throw new NotImplementedException();
+            var divisionalStructure = _dbContext.DivisionalStructures.FirstOrDefault(x => x.Id == id);
+            if (divisionalStructure is null)
+                throw new NotFoundException("Material not found");
+
+            var divisionalStructureEntity = _mapper.Map<DivisionalStructure>(dto);
+
+            divisionalStructure.Id = id;
+            divisionalStructure.Name = divisionalStructureEntity.Name;
+            divisionalStructure.Description = divisionalStructureEntity.Description;
+            divisionalStructure.Rsi = divisionalStructureEntity.Rsi;
+            divisionalStructure.Rse = divisionalStructureEntity.Rse;
+
+            //foreach (var material in dto.BuildingMaterials)
+            //{
+            //    var buildingMaterial = _mapper.Map<BuildingMaterial>(material);
+
+            //    var existingBuildingMaterial = _dbContext.BuildingMaterials.Find(buildingMaterial.Id);
+
+            //    if (existingBuildingMaterial != null)
+            //    {
+            //        divisionalStructureEntity.BuildingMaterials.Add(existingBuildingMaterial);
+            //    }
+
+            //}
+
+            //divisionalStructure.BuildingMaterials = divisionalStructureEntity.BuildingMaterials;
+            divisionalStructure.DivisionalThickness = _divisionalStructureCalc.CalculateThickness(dto.BuildingMaterials);
+
+
+            _dbContext.SaveChanges();
         }
     }
 }

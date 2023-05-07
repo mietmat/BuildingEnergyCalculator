@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingEnergyCalculator", "buildingEnergyCalculator\BuildingEnergyCalculator.csproj", "{FAC329EC-4E54-406D-99B0-7A3B84101B29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BECTests", "BECTests\BECTests.csproj", "{D1CD12A6-55EA-4B7F-A3B1-B12B6AD589FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingEnergyCalculator.Tests", "TestProject1\BuildingEnergyCalculator.Tests.csproj", "{B752E9D6-05EF-411A-AA5B-ABA6EB9DBDDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{FAC329EC-4E54-406D-99B0-7A3B84101B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAC329EC-4E54-406D-99B0-7A3B84101B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAC329EC-4E54-406D-99B0-7A3B84101B29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1CD12A6-55EA-4B7F-A3B1-B12B6AD589FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1CD12A6-55EA-4B7F-A3B1-B12B6AD589FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1CD12A6-55EA-4B7F-A3B1-B12B6AD589FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1CD12A6-55EA-4B7F-A3B1-B12B6AD589FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B752E9D6-05EF-411A-AA5B-ABA6EB9DBDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B752E9D6-05EF-411A-AA5B-ABA6EB9DBDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B752E9D6-05EF-411A-AA5B-ABA6EB9DBDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B752E9D6-05EF-411A-AA5B-ABA6EB9DBDDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

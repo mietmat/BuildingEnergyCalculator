@@ -1,4 +1,5 @@
-﻿using BuildingEnergyCalculator.Models;
+﻿using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Models;
 
 namespace BuildingEnergyCalculator.Calculator
 {
@@ -8,7 +9,7 @@ namespace BuildingEnergyCalculator.Calculator
         private double RSum { get; set; }//ThermalResistance m2K/W
 
 
-        public double CalculateRSum(CreateDivisionalStructureDto divisionalStructureDto, List<BuildingMaterialDto> buildingMaterialDto)
+        public double CalculateRSum(CreateDivisionalStructureDto divisionalStructureDto, List<CreateBuildingMaterialDto> buildingMaterialDto)
         {
             foreach (var material in buildingMaterialDto)
             {
@@ -20,7 +21,7 @@ namespace BuildingEnergyCalculator.Calculator
             return Math.Round(RSum,2);
         }
 
-        public double CalculateThickness(List<BuildingMaterialDto> buildingMaterials)
+        public double CalculateThickness(List<CreateBuildingMaterialDto> buildingMaterials)
         {
             foreach (var buildingMaterial in buildingMaterials)
             {

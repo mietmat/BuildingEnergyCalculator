@@ -7,7 +7,7 @@ namespace BuildingEnergyCalculator.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual List<BuildingMaterial> BuildingMaterials { get; set; }
+        public virtual List<CreateBuildingMaterialDto> BuildingMaterials { get; set; }
         public double DivisionalThickness { get; set; }// m
         public double RSum { get; set; }//ThermalResistance m2K/W
         public double U { get; set; }//HeatTransferCoefficient W/m2K
