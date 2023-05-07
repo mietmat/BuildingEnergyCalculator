@@ -4,6 +4,7 @@ using BuildingEnergyCalculator.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingEnergyCalculator.Migrations
 {
     [DbContext(typeof(EnergyCalculatorDbContext))]
-    partial class EnergyCalculatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230507154046_buildingParameters")]
+    partial class buildingParameters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,31 +23,6 @@ namespace BuildingEnergyCalculator.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("BuildingEnergyCalculator.Entities.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterial", b =>
                 {
@@ -121,10 +98,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("BuildingArea")
                         .HasColumnType("float");
 
-                    b.Property<string>("BuildingDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("BuildingLengthE")
                         .HasColumnType("float");
 
@@ -137,15 +110,19 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("BuildingLengthW")
                         .HasColumnType("float");
 
-                    b.Property<string>("BuildingName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("CellarHeight")
                         .HasColumnType("float");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("HeatAtticArea")
                         .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PerimiterOfTheBuilding")
                         .HasColumnType("float");
@@ -278,9 +255,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("Width")
                         .HasColumnType("float");
 
-                    b.Property<double>("λ")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BuildingParametersId");
@@ -288,56 +262,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.HasIndex("BuildingParametersId1");
 
                     b.ToTable("Doors");
-                });
-
-            modelBuilder.Entity("BuildingEnergyCalculator.Entities.Investment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("BuildingDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BuildingName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Investment");
-                });
-
-            modelBuilder.Entity("BuildingEnergyCalculator.Entities.Investor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Investor");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.Role", b =>
@@ -447,9 +371,6 @@ namespace BuildingEnergyCalculator.Migrations
                         .HasColumnType("float");
 
                     b.Property<double>("Width")
-                        .HasColumnType("float");
-
-                    b.Property<double>("λ")
                         .HasColumnType("float");
 
                     b.HasKey("Id");

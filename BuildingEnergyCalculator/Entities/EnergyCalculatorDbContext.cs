@@ -14,6 +14,12 @@ namespace BuildingEnergyCalculator.Entities
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<BuildingMaterialDivisionalStructure> BuildingMaterialDivisionalStructures { get; set; }
+        public DbSet<BuildingParameters> BuildingParameters { get; set; }
+        public DbSet<Door> Doors { get; set; }
+        public DbSet<Window> Windows { get; set; }
+        public DbSet<Investment> Investment { get; set; }
+        public DbSet<Investor> Investor { get; set; }
+        public DbSet<Address> Address { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
