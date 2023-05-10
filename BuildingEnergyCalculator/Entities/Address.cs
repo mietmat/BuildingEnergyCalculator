@@ -6,7 +6,6 @@
         public string City { get; set; }
         public string Street { get; set; }
         public string PostalCode { get; set; }
-        //public virtual Investment Investment { get; set; }
-        //public virtual Investor Investor { get; set; }
+
     }
 }

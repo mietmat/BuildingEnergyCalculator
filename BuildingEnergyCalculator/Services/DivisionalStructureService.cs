@@ -72,7 +72,10 @@ namespace BuildingEnergyCalculator.Services
         public void Delete(int id)
         {
             var itemToRemove = _dbContext.DivisionalStructures.FirstOrDefault(x => x.Id == id);
-            _dbContext.Remove(itemToRemove);
+            if (itemToRemove == null)
+                throw new NotFoundException("Divisional Structure not found");
+
+            _dbContext.DivisionalStructures.Remove(itemToRemove);
 
             _dbContext.SaveChanges();
 
@@ -94,7 +97,14 @@ namespace BuildingEnergyCalculator.Services
 
         public DivisionalStructureDto GetById(int id)
         {
-            throw new NotImplementedException();
+            var divisionalStructure = _dbContext.DivisionalStructures.FirstOrDefault(x => x.Id == id);
+
+            if (divisionalStructure is null)
+                throw new NotFoundException("Divisional Structure not found");
+
+            var divisionalStructureDto = _mapper.Map<DivisionalStructureDto>(divisionalStructure);
+
+            return divisionalStructureDto;
         }
 
         public void Update(UpdateDivisionalStructureDto dto, int id)

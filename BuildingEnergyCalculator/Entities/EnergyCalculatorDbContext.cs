@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
 
 namespace BuildingEnergyCalculator.Entities
@@ -17,9 +18,9 @@ namespace BuildingEnergyCalculator.Entities
         public DbSet<BuildingParameters> BuildingParameters { get; set; }
         public DbSet<Door> Doors { get; set; }
         public DbSet<Window> Windows { get; set; }
-        public DbSet<Investment> Investment { get; set; }
-        public DbSet<Investor> Investor { get; set; }
-        public DbSet<Address> Address { get; set; }
+        public DbSet<Investment> Investments { get; set; }
+        public DbSet<Investor> Investors { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,8 +41,46 @@ namespace BuildingEnergyCalculator.Entities
                     }
                 );
 
-            //modelBuilder.Entity<BuildingMaterialDivisionalStructure>()
-            //    .HasKey(c => new { c.BuildingMaterialId, c.DivisionalStructureId });
+            ////1:1
+            //modelBuilder.Entity<Investment>()
+            //    .HasOne(u => u.Address)
+            //    .WithOne(a => a.Investment)
+            //    .HasForeignKey<Address>(a => a.InvestmentId);
+
+            //modelBuilder.Entity<Investor>()
+            //    .HasOne(u => u.Address)
+            //    .WithOne(a => a.Investor)
+            //    .HasForeignKey<Address>(a => a.InvestorId);
+
+            ////1:many
+            //modelBuilder.Entity<Investor>()
+            //    .HasMany(u => u.Investments)
+            //    .WithOne(c => c.Investor)
+            //    .HasForeignKey(c => c.InvestorId);
+            ////whether is correct ?
+            //modelBuilder.Entity<Investment>()
+            //   .HasOne(u => u.Investor)
+            //   .WithMany(c => c.Investments)
+            //   .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+
+
+            //modelBuilder.Entity<Address>()
+            //    .HasKey(x => new { x.InvestorId, x.InvestmentId });
+
+            //modelBuilder.Entity<Address>()
+            //    .HasOne(x => x.Investor)
+            //    .WithMany(z => z.Investments)
+            //    .HasForeignKey(x => x.InvestorId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //modelBuilder.Entity<Address>()
+            //   .HasOne(x => x.Investment)
+            //   .WithMany(z => z.Investor)
+            //   .HasForeignKey(x => x.InvestmentId)
+            //   .OnDelete(DeleteBehavior.ClientSetNull);
+
 
         }
 

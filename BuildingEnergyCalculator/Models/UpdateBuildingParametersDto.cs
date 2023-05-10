@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BuildingEnergyCalculator.Entities;
 
-namespace BuildingEnergyCalculator.Entities
+namespace BuildingEnergyCalculator.Models
 {
-    public class BuildingParameters
+    public class UpdateBuildingParametersDto
     {
         public int Id { get; set; }
         //public string BuildingName { get; set; }
@@ -35,12 +35,7 @@ namespace BuildingEnergyCalculator.Entities
         public double TotalDoorAreaW { get; set; }
         public List<Window> WindowsZoneI { get; set; }
         public List<Door> DoorsZoneI { get; set; }
-        //public List<Window> WindowsZoneII { get; set; }
-        //public List<Door> DoorsZoneII { get; set; }
-
-
-
-
-
+        public List<Window> WindowsZoneII { get; set; }
+        public List<Door> DoorsZoneII { get; set; }
     }
 }
