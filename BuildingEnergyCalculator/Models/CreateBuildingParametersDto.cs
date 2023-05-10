@@ -5,8 +5,8 @@ namespace BuildingEnergyCalculator.Models
     public class CreateBuildingParametersDto
     {
         public int Id { get; set; }
-        public string BuildingName { get; set; }
-        public string BuildingDescription { get; set; }
+        //public string BuildingName { get; set; }
+        //public string BuildingDescription { get; set; }
         public double BuildingLengthN { get; set; }
         public double BuildingLengthE { get; set; }
         public double BuildingLengthS { get; set; }
