@@ -62,7 +62,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IDivisionalStructureCalc, DivisionalStructureCalc>();
 builder.Services.AddScoped<IBuildingMaterialCalc, BuildingMaterialCalc>();
 builder.Services.AddScoped<IBuildingParametersService, BuildingParametersService>();
-builder.Services.AddScoped<IInvestmentService, InvestmentService>();
+builder.Services.AddScoped<IBuildingInformationService, BuildingInformationService>();
 builder.Services.AddHttpContextAccessor();
 
 

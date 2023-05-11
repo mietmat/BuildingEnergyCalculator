@@ -18,7 +18,7 @@ namespace BuildingEnergyCalculator.Entities
         public DbSet<BuildingParameters> BuildingParameters { get; set; }
         public DbSet<Door> Doors { get; set; }
         public DbSet<Window> Windows { get; set; }
-        public DbSet<Investment> Investments { get; set; }
+        public DbSet<BuildingInformation> BuildingInformation { get; set; }
         public DbSet<Investor> Investors { get; set; }
         public DbSet<Address> Addresses { get; set; }
 

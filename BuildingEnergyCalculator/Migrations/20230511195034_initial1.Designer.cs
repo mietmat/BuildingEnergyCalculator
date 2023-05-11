@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingEnergyCalculator.Migrations
 {
     [DbContext(typeof(EnergyCalculatorDbContext))]
-    [Migration("20230507161137_buildingParametersUpdate")]
-    partial class buildingParametersUpdate
+    [Migration("20230511195034_initial1")]
+    partial class initial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,67 @@ namespace BuildingEnergyCalculator.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingInformation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BuildingParametersId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("InvestorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("BuildingParametersId");
+
+                    b.HasIndex("InvestorId");
+
+                    b.ToTable("BuildingInformation");
+                });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterial", b =>
                 {
@@ -98,10 +159,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("BuildingArea")
                         .HasColumnType("float");
 
-                    b.Property<string>("BuildingDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("BuildingLengthE")
                         .HasColumnType("float");
 
@@ -113,10 +170,6 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.Property<double>("BuildingLengthW")
                         .HasColumnType("float");
-
-                    b.Property<string>("BuildingName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("CellarHeight")
                         .HasColumnType("float");
@@ -230,9 +283,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<int?>("BuildingParametersId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BuildingParametersId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("CardinalDirection")
                         .HasColumnType("int");
 
@@ -255,13 +305,48 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("Width")
                         .HasColumnType("float");
 
+                    b.Property<double>("λ")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BuildingParametersId");
 
-                    b.HasIndex("BuildingParametersId1");
-
                     b.ToTable("Doors");
+                });
+
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.Investor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("Investors");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.Role", b =>
@@ -348,9 +433,6 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<int?>("BuildingParametersId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BuildingParametersId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("CardinalDirection")
                         .HasColumnType("int");
 
@@ -373,13 +455,37 @@ namespace BuildingEnergyCalculator.Migrations
                     b.Property<double>("Width")
                         .HasColumnType("float");
 
+                    b.Property<double>("λ")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BuildingParametersId");
 
-                    b.HasIndex("BuildingParametersId1");
-
                     b.ToTable("Windows");
+                });
+
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingInformation", b =>
+                {
+                    b.HasOne("BuildingEnergyCalculator.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BuildingEnergyCalculator.Entities.BuildingParameters", "BuildingParameters")
+                        .WithMany()
+                        .HasForeignKey("BuildingParametersId");
+
+                    b.HasOne("BuildingEnergyCalculator.Entities.Investor", "Investor")
+                        .WithMany()
+                        .HasForeignKey("InvestorId");
+
+                    b.Navigation("Address");
+
+                    b.Navigation("BuildingParameters");
+
+                    b.Navigation("Investor");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterialDivisionalStructure", b =>
@@ -406,10 +512,17 @@ namespace BuildingEnergyCalculator.Migrations
                     b.HasOne("BuildingEnergyCalculator.Entities.BuildingParameters", null)
                         .WithMany("DoorsZoneI")
                         .HasForeignKey("BuildingParametersId");
+                });
 
-                    b.HasOne("BuildingEnergyCalculator.Entities.BuildingParameters", null)
-                        .WithMany("DoorsZoneII")
-                        .HasForeignKey("BuildingParametersId1");
+            modelBuilder.Entity("BuildingEnergyCalculator.Entities.Investor", b =>
+                {
+                    b.HasOne("BuildingEnergyCalculator.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.User", b =>
@@ -428,21 +541,13 @@ namespace BuildingEnergyCalculator.Migrations
                     b.HasOne("BuildingEnergyCalculator.Entities.BuildingParameters", null)
                         .WithMany("WindowsZoneI")
                         .HasForeignKey("BuildingParametersId");
-
-                    b.HasOne("BuildingEnergyCalculator.Entities.BuildingParameters", null)
-                        .WithMany("WindowsZoneII")
-                        .HasForeignKey("BuildingParametersId1");
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingParameters", b =>
                 {
                     b.Navigation("DoorsZoneI");
 
-                    b.Navigation("DoorsZoneII");
-
                     b.Navigation("WindowsZoneI");
-
-                    b.Navigation("WindowsZoneII");
                 });
 #pragma warning restore 612, 618
         }

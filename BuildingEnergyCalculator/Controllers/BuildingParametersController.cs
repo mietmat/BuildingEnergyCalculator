@@ -7,10 +7,10 @@ namespace BuildingEnergyCalculator.Controllers
 {
     [Route("api/buildingparameters")]
     [ApiController]
-    public class BuildingParameters : ControllerBase
+    public class BuildingParametersController : ControllerBase
     {
         private readonly IBuildingParametersService _buildingParametersService;
-        public BuildingParameters(IBuildingParametersService buildingParametersService)
+        public BuildingParametersController(IBuildingParametersService buildingParametersService)
         {
             _buildingParametersService = buildingParametersService;
         }
@@ -23,9 +23,9 @@ namespace BuildingEnergyCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<BuildingParametersDto>> GetAll()
+        public async Task<ActionResult<IEnumerable<BuildingParametersDto>>> GetAll()
         {
-            var buildingParametersDtos = _buildingParametersService.GetAll();
+            var buildingParametersDtos = await _buildingParametersService.GetAll();
             return Ok(buildingParametersDtos);
         }
 

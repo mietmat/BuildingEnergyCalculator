@@ -20,8 +20,8 @@ namespace BuildingEnergyCalculator
             CreateMap<BuildingParameters, BuildingParametersDto>().ReverseMap();
 
 
-            CreateMap<Investment, CreateInvestmentDto>().ReverseMap();
-            CreateMap<Investment, InvestmentDto>().ReverseMap();
+            CreateMap<BuildingInformation, CreateBuildingInformationDto>().ReverseMap();
+            CreateMap<BuildingInformation, BuildingInformationDto>().ReverseMap();
 
 
 

@@ -55,7 +55,7 @@ namespace BuildingEnergyCalculator.Services
 
         public async Task<BuildingParametersDto> GetById(int id)
         {
-            var existingBuildingParameters = await _dbContext.Investments.FirstOrDefaultAsync(x => x.Id == id);
+            var existingBuildingParameters = await _dbContext.BuildingInformation.FirstOrDefaultAsync(x => x.Id == id);
 
             if (existingBuildingParameters is null)
             {
