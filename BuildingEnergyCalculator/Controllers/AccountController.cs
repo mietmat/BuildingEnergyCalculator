@@ -12,7 +12,7 @@ namespace BuildingEnergyCalculator.Controllers
 {
     [Route("api/account")]
     [ApiController]
-    public class AccountCotroller : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
         private readonly IConfiguration _configuration;
@@ -20,7 +20,7 @@ namespace BuildingEnergyCalculator.Controllers
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly EnergyCalculatorDbContext _dbContext;
 
-        public AccountCotroller(EnergyCalculatorDbContext dbContext, IAccountService accountService, IConfiguration configuration, IEmailService emailService,
+        public AccountController(EnergyCalculatorDbContext dbContext, IAccountService accountService, IConfiguration configuration, IEmailService emailService,
             IPasswordHasher<User> passwordHasher)
         {
             _accountService = accountService;

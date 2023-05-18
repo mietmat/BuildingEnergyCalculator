@@ -2,5 +2,7 @@
 {
     public class Door : BuildingHole
     {
+        public int Id { get; set; }
+
     }
 }

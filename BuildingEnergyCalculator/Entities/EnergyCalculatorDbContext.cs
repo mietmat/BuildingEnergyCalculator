@@ -40,6 +40,15 @@ namespace BuildingEnergyCalculator.Entities
                         mid.HasKey(x => new { x.DivisionalStructureId, x.BuildingMaterialId });
                     }
                 );
+            //modelBuilder.Entity<Door>()
+            //    .ToTable("Doors");
+
+            //if you have additional prop in door but not in BuildingHole
+            //modelBuilder.Entity<Door>()
+            //.Property(d => d.Material)
+            //.HasMaxLength(50);
+
+
 
             ////1:1
             //modelBuilder.Entity<Investment>()
