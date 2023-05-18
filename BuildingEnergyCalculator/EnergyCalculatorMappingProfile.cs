@@ -23,6 +23,15 @@ namespace BuildingEnergyCalculator
             CreateMap<BuildingInformation, CreateBuildingInformationDto>().ReverseMap();
             CreateMap<BuildingInformation, BuildingInformationDto>().ReverseMap();
 
+            CreateMap<Door, CreateDoorDto>().ReverseMap();
+            CreateMap<Door, DoorDto>().ReverseMap();
+            CreateMap<Door, UpdateDoorDto>().ReverseMap();
+
+            CreateMap<Window, CreateWindowDto>().ReverseMap();
+            CreateMap<Window, WindowDto>().ReverseMap();
+            CreateMap<Window, UpdateWindowDto>().ReverseMap();
+
+
 
 
 

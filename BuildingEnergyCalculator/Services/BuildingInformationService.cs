@@ -50,6 +50,12 @@ namespace BuildingEnergyCalculator.Services
                 .Include(b => b.Address)
                 .Include(b => b.BuildingParameters)
                 .ToListAsync();
+
+            if (buildingInformations is null)
+            {
+                throw new NotFoundException("Building informations not found");
+            }
+
             var buildingInformationsDtos = _mapper.Map<List<BuildingInformationDto>>(buildingInformations);
             return buildingInformationsDtos;
         }
