@@ -6,7 +6,14 @@ namespace BuildingEnergyCalculator.Calculator
     {
         public double CalculateRectangleArea(double a, double b)
         {
-            return a * b;
+            if (a <= 0 || b <= 0)
+            {
+                throw new ArgumentException("Length is not a valid number");
+            }
+
+            var area = a * b;
+
+            return Math.Round(area,2);
         }
 
         public double CalculateRectanglePerimeter(double a, double b)
