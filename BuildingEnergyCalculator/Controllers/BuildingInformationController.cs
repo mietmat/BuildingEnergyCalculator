@@ -1,13 +1,15 @@
 ﻿using BuildingEnergyCalculator.Entities;
 using BuildingEnergyCalculator.Models;
 using BuildingEnergyCalculator.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuildingEnergyCalculator.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/buildinginformation")]
     [ApiController]
+    [Authorize]
     public class BuildingInformationController : ControllerBase
     {
         private readonly IBuildingInformationService _buildingInformationService;
@@ -20,11 +22,12 @@ namespace BuildingEnergyCalculator.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateBuildingInformationDto dto)
         {
-            var id = _buildingInformationService.Create(dto);
-            return Created($"/api/investment/{id}", null);
+            var id = await _buildingInformationService.Create(dto);
+            return Created($"/api/buildinginformation/{id}", null);
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<BuildingInformationDto>>> GetAll()
         {
             var investmentDtos = await _buildingInformationService.GetAll();

@@ -16,12 +16,16 @@ namespace BuildingEnergyCalculator
         {
             if (_dbContext.Database.CanConnect())
             {
-                var pendingMigrations = _dbContext.Database.GetPendingMigrations();//not implemented migration list
-                if (pendingMigrations != null && pendingMigrations.Any())
+                if (_dbContext.Database.IsRelational())// for inMemoryDbContext it avoid taking data from not relational db
                 {
-                    _dbContext.Database.Migrate();
+                    var pendingMigrations = _dbContext.Database.GetPendingMigrations();//not implemented migration list
+                    if (pendingMigrations != null && pendingMigrations.Any())
+                    {
+                        _dbContext.Database.Migrate();
 
+                    }
                 }
+
 
                 if (!_dbContext.Roles.Any())
                 {
@@ -34,6 +38,13 @@ namespace BuildingEnergyCalculator
                 {
                     var buildingMaterials = GetBuildingMaterials();
                     _dbContext.BuildingMaterials.AddRange(buildingMaterials);
+                    _dbContext.SaveChanges();
+                }
+
+                if (!_dbContext.BuildingInformation.Any()) // sprawdzenie czy nie ma żadnego wiersza
+                {
+                    var buildingInformations = GetBuildingInformations();
+                    _dbContext.BuildingInformation.AddRange(buildingInformations);
                     _dbContext.SaveChanges();
                 }
             }
@@ -60,6 +71,285 @@ namespace BuildingEnergyCalculator
             return roles;
         }
 
+        private IEnumerable<BuildingInformation> GetBuildingInformations()
+        {
+            var buildingInformations = new List<BuildingInformation>()
+            {
+                new BuildingInformation()
+                {
+                    Name= "PK",
+                    Description= "Offices",
+                    Address = new Address()
+                    {
+                        City= "Cracow",
+                        Street= "Pawia 5",
+                        PostalCode= "31-201"
+                    },
+                    Investor = new Investor()
+                    {
+                        Name= "Hugon",
+                        LastName= "Karp",
+                        PhoneNumber= "888777444",
+                        Email= "hugonkarp@gmail.com",
+                        Address= new Address()
+                        {
+                            City= "Warsaw",
+                            Street= "Krótka 8",
+                            PostalCode= "35-508"
+                        }
+                    },
+                    BuildingParameters= new BuildingParameters()
+                    {
+                        BuildingLengthN= 10,
+                        BuildingLengthE= 20,
+                        BuildingLengthS= 10,
+                        BuildingLengthW= 20,
+                        StoreyHeightNet= 0,
+                        StoreyHeightGross= 0,
+                        CellarHeight = 0,
+                        StoreyQuantity= 0,
+                        BuildingArea= 0,
+                        StaircaseSurface= 0,
+                        UsableAreaOfTheStairCase= 0,
+                        StaircaseWidth= 0,
+                        HeatAtticArea= 0,
+                        UnheatedAtticArea= 0,
+                        UsableAreaOfTheBuilding= 0,
+                        AtticUsableArea= 0,
+                        BalconyLength= 0,
+                        TotalWindowAreaN= 0,
+                        TotalWindowAreaE= 0,
+                        TotalWindowAreaS= 0,
+                        TotalWindowAreaW= 0,
+                        TotalDoorAreaN= 0,
+                        TotalDoorAreaE= 0,
+                        TotalDoorAreaS= 0,
+                        TotalDoorAreaW= 0,
+                        WindowsZoneI = new List<Window>()
+                        {
+                            new Window()
+                            {
+                                Name = "Window 1",
+                                Description="Velux",
+                                Width= 1,
+                                Height= 20,
+                                Perimeter= 30,
+                                Quantity= 40,
+                                SingleArea= 0,
+                                U= 0,
+                                CardinalDirection= "N",
+                                Floor= 0
+
+                            }
+                        },
+                        DoorsZoneI = new List<Door>()
+                        {
+                            new Door()
+                            {
+                                Name = "Door 1",
+                                Description="Velux",
+                                Width= 5,
+                                Height= 6,
+                                Perimeter= 8,
+                                Quantity= 0,
+                                SingleArea= 0,
+                                U= 0,
+                                CardinalDirection= "S",
+                                Floor= 0
+
+                            }
+                        }
+
+
+
+
+                    }
+                },
+                 new BuildingInformation()
+                {
+                    Name= "PK",
+                    Description= "Offices",
+                    Address = new Address()
+                    {
+                        City= "Cracow",
+                        Street= "Pawia 5",
+                        PostalCode= "31-201"
+                    },
+                    Investor = new Investor()
+                    {
+                        Name= "Hugon",
+                        LastName= "Karp",
+                        PhoneNumber= "888777444",
+                        Email= "hugonkarp@gmail.com",
+                        Address= new Address()
+                        {
+                            City= "Warsaw",
+                            Street= "Krótka 8",
+                            PostalCode= "35-508"
+                        }
+                    },
+                    BuildingParameters= new BuildingParameters()
+                    {
+                        BuildingLengthN= 10,
+                        BuildingLengthE= 20,
+                        BuildingLengthS= 10,
+                        BuildingLengthW= 20,
+                        StoreyHeightNet= 0,
+                        StoreyHeightGross= 0,
+                        CellarHeight = 0,
+                        StoreyQuantity= 0,
+                        BuildingArea= 0,
+                        StaircaseSurface= 0,
+                        UsableAreaOfTheStairCase= 0,
+                        StaircaseWidth= 0,
+                        HeatAtticArea= 0,
+                        UnheatedAtticArea= 0,
+                        UsableAreaOfTheBuilding= 0,
+                        AtticUsableArea= 0,
+                        BalconyLength= 0,
+                        TotalWindowAreaN= 0,
+                        TotalWindowAreaE= 0,
+                        TotalWindowAreaS= 0,
+                        TotalWindowAreaW= 0,
+                        TotalDoorAreaN= 0,
+                        TotalDoorAreaE= 0,
+                        TotalDoorAreaS= 0,
+                        TotalDoorAreaW= 0,
+                        WindowsZoneI = new List<Window>()
+                        {
+                            new Window()
+                            {
+                                Name = "Window 1",
+                                Description="Velux",
+                                Width= 1,
+                                Height= 20,
+                                Perimeter= 30,
+                                Quantity= 40,
+                                SingleArea= 0,
+                                U= 0,
+                                CardinalDirection= "N",
+                                Floor= 0
+
+                            }
+                        },
+                        DoorsZoneI = new List<Door>()
+                        {
+                            new Door()
+                            {
+                                Name = "Door 1",
+                                Description="Velux",
+                                Width= 5,
+                                Height= 6,
+                                Perimeter= 8,
+                                Quantity= 0,
+                                SingleArea= 0,
+                                U= 0,
+                                CardinalDirection= "S",
+                                Floor= 0
+
+                            }
+                        }
+
+
+
+
+                    }
+                },
+                  new BuildingInformation()
+                {
+                    Name= "PK",
+                    Description= "Offices",
+                    Address = new Address()
+                    {
+                        City= "Cracow",
+                        Street= "Pawia 5",
+                        PostalCode= "31-201"
+                    },
+                    Investor = new Investor()
+                    {
+                        Name= "Hugon",
+                        LastName= "Karp",
+                        PhoneNumber= "888777444",
+                        Email= "hugonkarp@gmail.com",
+                        Address= new Address()
+                        {
+                            City= "Warsaw",
+                            Street= "Krótka 8",
+                            PostalCode= "35-508"
+                        }
+                    },
+                    BuildingParameters= new BuildingParameters()
+                    {
+                        BuildingLengthN= 10,
+                        BuildingLengthE= 20,
+                        BuildingLengthS= 10,
+                        BuildingLengthW= 20,
+                        StoreyHeightNet= 0,
+                        StoreyHeightGross= 0,
+                        CellarHeight = 0,
+                        StoreyQuantity= 0,
+                        BuildingArea= 0,
+                        StaircaseSurface= 0,
+                        UsableAreaOfTheStairCase= 0,
+                        StaircaseWidth= 0,
+                        HeatAtticArea= 0,
+                        UnheatedAtticArea= 0,
+                        UsableAreaOfTheBuilding= 0,
+                        AtticUsableArea= 0,
+                        BalconyLength= 0,
+                        TotalWindowAreaN= 0,
+                        TotalWindowAreaE= 0,
+                        TotalWindowAreaS= 0,
+                        TotalWindowAreaW= 0,
+                        TotalDoorAreaN= 0,
+                        TotalDoorAreaE= 0,
+                        TotalDoorAreaS= 0,
+                        TotalDoorAreaW= 0,
+                        WindowsZoneI = new List<Window>()
+                        {
+                            new Window()
+                            {
+                                Name = "Window 1",
+                                Description="Velux",
+                                Width= 1,
+                                Height= 20,
+                                Perimeter= 30,
+                                Quantity= 40,
+                                SingleArea= 0,
+                                U= 0,
+                                CardinalDirection= "N",
+                                Floor= 0
+
+                            }
+                        },
+                        DoorsZoneI = new List<Door>()
+                        {
+                            new Door()
+                            {
+                                Name = "Door 1",
+                                Description="Velux",
+                                Width= 5,
+                                Height= 6,
+                                Perimeter= 8,
+                                Quantity= 0,
+                                SingleArea= 0,
+                                U= 0,
+                                CardinalDirection= "S",
+                                Floor= 0
+
+                            }
+                        }
+
+
+
+
+                    }
+                }
+            };
+
+            return buildingInformations;
+        }
+
         private IEnumerable<BuildingMaterial> GetBuildingMaterials()
         {
             var buildingMaterials = new List<BuildingMaterial>()
@@ -72,7 +362,7 @@ namespace BuildingEnergyCalculator
                     LambdaW=200,
                     Ro=2700,
                     Cw=0.87
-                    
+
 
                 },
                 new BuildingMaterial()
