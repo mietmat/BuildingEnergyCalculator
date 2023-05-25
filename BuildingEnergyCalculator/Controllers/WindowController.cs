@@ -19,7 +19,7 @@ namespace BuildingEnergyCalculator.Controllers
         public async Task<ActionResult> Create([FromBody] CreateWindowDto dto)
         {
             var id = _windowService.Create(dto);
-            return Created($"/api/door/{id}", null);
+            return Created($"/api/window/{id}", null);
         }
 
         [HttpGet]
