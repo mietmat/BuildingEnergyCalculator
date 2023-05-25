@@ -44,7 +44,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingInformation", b =>
@@ -80,7 +80,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasIndex("InvestorId");
 
-                    b.ToTable("BuildingInformation");
+                    b.ToTable("BuildingInformation", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterial", b =>
@@ -122,7 +122,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BuildingMaterials");
+                    b.ToTable("BuildingMaterials", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingMaterialDivisionalStructure", b =>
@@ -137,7 +137,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasIndex("BuildingMaterialId");
 
-                    b.ToTable("BuildingMaterialDivisionalStructures");
+                    b.ToTable("BuildingMaterialDivisionalStructures", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingParameters", b =>
@@ -228,7 +228,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BuildingParameters");
+                    b.ToTable("BuildingParameters", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.DivisionalStructure", b =>
@@ -264,7 +264,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DivisionalStructures");
+                    b.ToTable("DivisionalStructures", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.Door", b =>
@@ -315,7 +315,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasIndex("BuildingParametersId");
 
-                    b.ToTable("Doors");
+                    b.ToTable("Doors", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.Investor", b =>
@@ -349,7 +349,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Investors");
+                    b.ToTable("Investors", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.Role", b =>
@@ -366,7 +366,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.User", b =>
@@ -419,7 +419,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.Window", b =>
@@ -470,7 +470,7 @@ namespace BuildingEnergyCalculator.Migrations
 
                     b.HasIndex("BuildingParametersId");
 
-                    b.ToTable("Windows");
+                    b.ToTable("Windows", (string)null);
                 });
 
             modelBuilder.Entity("BuildingEnergyCalculator.Entities.BuildingInformation", b =>
