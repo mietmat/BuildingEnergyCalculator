@@ -38,9 +38,6 @@ namespace BuildingEnergyCalculator.Entities
         //public List<Window> WindowsZoneII { get; set; }
         //public List<Door> DoorsZoneII { get; set; }
 
-
-
-
-
+        
     }
 }
