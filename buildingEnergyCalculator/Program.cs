@@ -67,6 +67,7 @@ builder.Services.AddScoped<IBuildingInformationService, BuildingInformationServi
 builder.Services.AddScoped<IDoorService, DoorService>();
 builder.Services.AddScoped<ICalculator, Calculator>();
 builder.Services.AddScoped<IWindowService, WindowService>();
+builder.Services.AddScoped<IFloorOnTheGroundService, FloorOnTheGroundService>();
 builder.Services.AddHttpContextAccessor();
 
 

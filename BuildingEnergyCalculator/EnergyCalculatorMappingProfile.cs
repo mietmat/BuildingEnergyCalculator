@@ -31,6 +31,11 @@ namespace BuildingEnergyCalculator
             CreateMap<Window, WindowDto>().ReverseMap();
             CreateMap<Window, UpdateWindowDto>().ReverseMap();
 
+            
+            CreateMap<FloorOnTheGround, CreateFloorOnTheGroundDto>().ReverseMap();
+            CreateMap<FloorOnTheGround, FloorOnTheGroundDto>().ReverseMap();
+            CreateMap<FloorOnTheGround, UpdateFloorOnTheGroundDto>().ReverseMap();
+
 
 
 
