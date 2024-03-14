@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingEnergyCalculator", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingEnergyCalculator.IntegrationTests", "TestProject1\BuildingEnergyCalculator.IntegrationTests.csproj", "{B752E9D6-05EF-411A-AA5B-ABA6EB9DBDDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{BFA9C5AF-23C6-4651-AD68-98C442AE686A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcServer", "Calculator\CalcServer.csproj", "{BFA9C5AF-23C6-4651-AD68-98C442AE686A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

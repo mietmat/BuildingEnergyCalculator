@@ -1,4 +1,4 @@
-﻿using BuildingEnergyCalculator.Entities;
+﻿using BuildingEnergyCalculator.Entities.Library;
 
 namespace BuildingEnergyCalculator.Models
 {
@@ -33,8 +33,8 @@ namespace BuildingEnergyCalculator.Models
         public double TotalDoorAreaE { get; set; }
         public double TotalDoorAreaS { get; set; }
         public double TotalDoorAreaW { get; set; }
-        public List<Window> WindowsZoneI { get; set; }
-        public List<Door> DoorsZoneI { get; set; }
+        public List<Window> Windows { get; set; }
+        public List<Door> Doors { get; set; }
         public List<Window> WindowsZoneII { get; set; }
         public List<Door> DoorsZoneII { get; set; }
     }

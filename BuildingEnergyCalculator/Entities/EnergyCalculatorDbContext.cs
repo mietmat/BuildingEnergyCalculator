@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BuildingEnergyCalculator.Entities.Library;
+using BuildingEnergyCalculator.Entities.Project;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
 
@@ -22,6 +24,8 @@ namespace BuildingEnergyCalculator.Entities
         public DbSet<FloorOnTheGround> FloorOnTheGround { get; set; }
         public DbSet<Investor> Investors { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<BuildingObject> BuildingObjects { get; set; }
+        public DbSet<ProjectModel> ProjectModels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

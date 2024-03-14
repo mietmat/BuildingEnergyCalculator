@@ -1,4 +1,6 @@
-﻿namespace BuildingEnergyCalculator.Entities
+﻿using BuildingEnergyCalculator.Entities.Project;
+
+namespace BuildingEnergyCalculator.Entities.Library
 {
     public class BuildingMaterialDivisionalStructure
     {

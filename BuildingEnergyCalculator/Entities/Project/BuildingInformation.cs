@@ -1,4 +1,4 @@
-﻿namespace BuildingEnergyCalculator.Entities
+﻿namespace BuildingEnergyCalculator.Entities.Project
 {
     public class BuildingInformation
     {

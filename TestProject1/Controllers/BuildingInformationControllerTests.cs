@@ -1,4 +1,5 @@
 ﻿using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Project;
 using BuildingEnergyCalculator.IntegrationTests;
 using BuildingEnergyCalculator.Models;
 using FluentAssertions;

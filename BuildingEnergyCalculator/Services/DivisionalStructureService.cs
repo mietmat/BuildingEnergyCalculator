@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
-using BuildingEnergyCalculator.Calculator;
 using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Library;
+using BuildingEnergyCalculator.Entities.Project;
 using BuildingEnergyCalculator.Exceptions;
+using BuildingEnergyCalculator.Helpers;
 using BuildingEnergyCalculator.Models;
+using CalcServer.BuildingParameters;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Newtonsoft.Json;
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Xml;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace BuildingEnergyCalculator.Services
@@ -18,22 +16,29 @@ namespace BuildingEnergyCalculator.Services
     {
         private readonly EnergyCalculatorDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IDivisionalStructureCalc _divisionalStructureCalc;
+        private readonly ICalculator _calculator;
+        private readonly DataPreparer _dataPreparer;
 
-        public DivisionalStructureService(EnergyCalculatorDbContext dbContext, IMapper mapper, IDivisionalStructureCalc divisionalStructureCalc)
+        public DivisionalStructureService(EnergyCalculatorDbContext dbContext,
+            IMapper mapper,
+            ICalculator calculator,
+            DataPreparer dataPreparer)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _divisionalStructureCalc = divisionalStructureCalc;
+            _calculator = calculator;
+            _dataPreparer = dataPreparer;
         }
 
         public int Create(CreateDivisionalStructureDto dto)
         {
-            var thickness = _divisionalStructureCalc.CalculateThickness(dto.BuildingMaterials);
-            dto.DivisionalThickness = thickness;
-            var rSum = _divisionalStructureCalc.CalculateRSum(dto, dto.BuildingMaterials);
+            var thicknessesList = _dataPreparer.CalculateTotalThicknessForDivisionalStructure(dto.BuildingMaterials);
+            var totalThickness = _calculator.CalculateTotalThickness(thicknessesList);
+            dto.DivisionalThickness = totalThickness;
+            var rList = _dataPreparer.PrepareRList(dto.BuildingMaterials);
+            var rSum = _calculator.CalculateRSum(dto.Rsi, dto.Rse, rList);
             dto.RSum = rSum;
-            var U = _divisionalStructureCalc.CalculateU(dto.RSum);
+            var U = _calculator.CalculateU(rSum);
             dto.U = U;
 
             var divisionalStructureEntity = new DivisionalStructure
@@ -121,23 +126,11 @@ namespace BuildingEnergyCalculator.Services
             divisionalStructure.Rsi = divisionalStructureEntity.Rsi;
             divisionalStructure.Rse = divisionalStructureEntity.Rse;
 
-            //foreach (var material in dto.BuildingMaterials)
-            //{
-            //    var buildingMaterial = _mapper.Map<BuildingMaterial>(material);
+            
+            var thicknessesList = _dataPreparer.CalculateTotalThicknessForDivisionalStructure(dto.BuildingMaterials);
+            var totalThickness = _calculator.CalculateTotalThickness(thicknessesList);
 
-            //    var existingBuildingMaterial = _dbContext.BuildingMaterials.Find(buildingMaterial.Id);
-
-            //    if (existingBuildingMaterial != null)
-            //    {
-            //        divisionalStructureEntity.BuildingMaterials.Add(existingBuildingMaterial);
-            //    }
-
-            //}
-
-            //divisionalStructure.BuildingMaterials = divisionalStructureEntity.BuildingMaterials;
-            divisionalStructure.DivisionalThickness = _divisionalStructureCalc.CalculateThickness(dto.BuildingMaterials);
-
-
+            divisionalStructure.DivisionalThickness = totalThickness;
             _dbContext.SaveChanges();
         }
     }

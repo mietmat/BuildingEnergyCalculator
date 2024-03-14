@@ -1,4 +1,6 @@
 ﻿using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Library;
+using BuildingEnergyCalculator.Entities.Project;
 using Microsoft.EntityFrameworkCore;
 
 namespace BuildingEnergyCalculator
@@ -125,7 +127,7 @@ namespace BuildingEnergyCalculator
                         TotalDoorAreaE= 0,
                         TotalDoorAreaS= 0,
                         TotalDoorAreaW= 0,
-                        WindowsZoneI = new List<Window>()
+                        Windows = new List<Window>()
                         {
                             new Window()
                             {
@@ -142,7 +144,7 @@ namespace BuildingEnergyCalculator
 
                             }
                         },
-                        DoorsZoneI = new List<Door>()
+                        Doors = new List<Door>()
                         {
                             new Door()
                             {
@@ -215,7 +217,7 @@ namespace BuildingEnergyCalculator
                         TotalDoorAreaE= 0,
                         TotalDoorAreaS= 0,
                         TotalDoorAreaW= 0,
-                        WindowsZoneI = new List<Window>()
+                        Windows = new List<Window>()
                         {
                             new Window()
                             {
@@ -232,7 +234,7 @@ namespace BuildingEnergyCalculator
 
                             }
                         },
-                        DoorsZoneI = new List<Door>()
+                        Doors = new List<Door>()
                         {
                             new Door()
                             {
@@ -305,7 +307,7 @@ namespace BuildingEnergyCalculator
                         TotalDoorAreaE= 0,
                         TotalDoorAreaS= 0,
                         TotalDoorAreaW= 0,
-                        WindowsZoneI = new List<Window>()
+                        Windows = new List<Window>()
                         {
                             new Window()
                             {
@@ -322,7 +324,7 @@ namespace BuildingEnergyCalculator
 
                             }
                         },
-                        DoorsZoneI = new List<Door>()
+                        Doors = new List<Door>()
                         {
                             new Door()
                             {
