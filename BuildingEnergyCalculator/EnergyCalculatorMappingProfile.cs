@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Library;
+using BuildingEnergyCalculator.Entities.Project;
 using BuildingEnergyCalculator.Models;
 
 namespace BuildingEnergyCalculator
@@ -35,6 +36,11 @@ namespace BuildingEnergyCalculator
             CreateMap<FloorOnTheGround, CreateFloorOnTheGroundDto>().ReverseMap();
             CreateMap<FloorOnTheGround, FloorOnTheGroundDto>().ReverseMap();
             CreateMap<FloorOnTheGround, UpdateFloorOnTheGroundDto>().ReverseMap();
+
+
+            CreateMap<ProjectModel, CreateProjectModelDto>().ReverseMap();
+            CreateMap<ProjectModel, ProjectModelDto>().ReverseMap();
+            CreateMap<ProjectModel, UpdateProjectModelDto>().ReverseMap();
 
 
 

@@ -1,10 +1,11 @@
 using AutoMapper;
 using BuildingEnergyCalculator;
-using BuildingEnergyCalculator.Calculator;
 using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Helpers;
 using BuildingEnergyCalculator.Models;
 using BuildingEnergyCalculator.Models.Validators;
 using BuildingEnergyCalculator.Services;
+using CalcServer.BuildingParameters;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -61,14 +62,14 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IDivisionalStructureCalc, DivisionalStructureCalc>();
-builder.Services.AddScoped<IBuildingMaterialCalc, BuildingMaterialCalc>();
 builder.Services.AddScoped<IBuildingParametersService, BuildingParametersService>();
 builder.Services.AddScoped<IBuildingInformationService, BuildingInformationService>();
 builder.Services.AddScoped<IDoorService, DoorService>();
 builder.Services.AddScoped<ICalculator, Calculator>();
 builder.Services.AddScoped<IWindowService, WindowService>();
 builder.Services.AddScoped<IFloorOnTheGroundService, FloorOnTheGroundService>();
+builder.Services.AddScoped<DataPreparer>();
+builder.Services.AddScoped<IProjectModelService, ProjectModelService>();
 builder.Services.AddHttpContextAccessor();
 
 

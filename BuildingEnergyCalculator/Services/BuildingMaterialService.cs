@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BuildingEnergyCalculator.Calculator;
 using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Library;
 using BuildingEnergyCalculator.Exceptions;
 using BuildingEnergyCalculator.Models;
-using Microsoft.EntityFrameworkCore;
+using CalcServer.BuildingParameters;
 
 namespace BuildingEnergyCalculator.Services
 {
@@ -11,18 +11,20 @@ namespace BuildingEnergyCalculator.Services
     {
         private readonly EnergyCalculatorDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IBuildingMaterialCalc _buildingMaterialCalc;
+        private readonly ICalculator _calculator;
+
         public BuildingMaterialService(EnergyCalculatorDbContext dbContext,
-            IMapper mapper,IBuildingMaterialCalc buildingMaterialCalc)
+            IMapper mapper, ICalculator calculator)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _buildingMaterialCalc = buildingMaterialCalc;
+            _calculator = calculator;
         }
         public int Create(CreateBuildingMaterialDto dto)
         {
-            _buildingMaterialCalc.CalculateR(dto);
+            var r = _calculator.CalculateR(dto.Thickness, dto.LambdaSW);
 
+            dto.R = r;
             var buildingMaterial = _mapper.Map<BuildingMaterial>(dto);
             _dbContext.BuildingMaterials.Add(buildingMaterial);
             _dbContext.SaveChanges();
@@ -47,7 +49,7 @@ namespace BuildingEnergyCalculator.Services
             var buildingMaterials = _dbContext.BuildingMaterials.ToList();
             var buildingMaterialsDtos = _mapper.Map<List<BuildingMaterialDto>>(buildingMaterials);
             return buildingMaterialsDtos;
-        }       
+        }
 
         public BuildingMaterialDto GetById(int id)
         {

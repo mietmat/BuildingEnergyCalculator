@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BuildingEnergyCalculator.Entities.Project;
 
-namespace BuildingEnergyCalculator.Entities
+namespace BuildingEnergyCalculator.Entities.Library
 {
     public class BuildingMaterial
     {

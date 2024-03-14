@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BuildingEnergyCalculator.Calculator;
 using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Library;
 using BuildingEnergyCalculator.Exceptions;
 using BuildingEnergyCalculator.Models;
-using Microsoft.AspNetCore.Mvc;
+using CalcServer.BuildingParameters;
 using Microsoft.EntityFrameworkCore;
 
 namespace BuildingEnergyCalculator.Services

@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BuildingEnergyCalculator.Entities
+namespace BuildingEnergyCalculator.Entities.Project
 {
     public class FloorOnTheGround
     {
         public int Id { get; set; }
-        public string Name { get; set; }                
-        public string Description { get; set; }               
+        public string Name { get; set; }
+        public string Description { get; set; }
 
         public double Ag { get; set; }
         public double P { get; set; }

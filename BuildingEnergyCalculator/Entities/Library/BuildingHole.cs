@@ -1,6 +1,6 @@
 ﻿using BuildingEnergyCalculator.Enums;
 
-namespace BuildingEnergyCalculator.Entities
+namespace BuildingEnergyCalculator.Entities.Library
 {
     public abstract class BuildingHole
     {

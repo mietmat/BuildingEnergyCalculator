@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Project;
 using BuildingEnergyCalculator.Exceptions;
 using BuildingEnergyCalculator.Models;
 using Microsoft.EntityFrameworkCore;
@@ -82,7 +83,7 @@ namespace BuildingEnergyCalculator.Services
             buildingParameters.BuildingLengthN = dto.BuildingLengthN;
             buildingParameters.AtticUsableArea = dto.AtticUsableArea;
             buildingParameters.CellarHeight = dto.CellarHeight;
-            buildingParameters.DoorsZoneI = dto.DoorsZoneI;
+            buildingParameters.Doors = dto.Doors;
             buildingParameters.HeatAtticArea = dto.HeatAtticArea;
             buildingParameters.PerimiterOfTheBuilding = dto.PerimiterOfTheBuilding;
             buildingParameters.StaircaseSurface = dto.StaircaseSurface;
@@ -104,7 +105,7 @@ namespace BuildingEnergyCalculator.Services
             buildingParameters.UnheatedAtticArea = dto.UnheatedAtticArea;
             buildingParameters.UsableAreaOfTheBuilding = dto.UsableAreaOfTheBuilding;
             buildingParameters.UsableAreaOfTheStairCase = dto.UsableAreaOfTheStairCase;
-            buildingParameters.WindowsZoneI = dto.WindowsZoneI;
+            buildingParameters.Windows = dto.Windows;
 
             _dbContext.SaveChanges();
         }
