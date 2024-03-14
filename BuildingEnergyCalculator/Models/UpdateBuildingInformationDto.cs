@@ -1,4 +1,4 @@
-﻿using BuildingEnergyCalculator.Entities;
+﻿using BuildingEnergyCalculator.Entities.Project;
 
 namespace BuildingEnergyCalculator.Models
 {

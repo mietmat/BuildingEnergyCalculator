@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Project;
 using BuildingEnergyCalculator.Exceptions;
 using BuildingEnergyCalculator.Models;
 using Microsoft.AspNetCore.Mvc;

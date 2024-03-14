@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BuildingEnergyCalculator.Calculator;
 using BuildingEnergyCalculator.Entities;
+using BuildingEnergyCalculator.Entities.Library;
 using BuildingEnergyCalculator.Exceptions;
 using BuildingEnergyCalculator.Models;
-using Microsoft.AspNetCore.Mvc;
+using CalcServer.BuildingParameters;
 using Microsoft.EntityFrameworkCore;
 
 namespace BuildingEnergyCalculator.Services
@@ -27,6 +27,7 @@ namespace BuildingEnergyCalculator.Services
             var window = _mapper.Map<Window>(createWindowDto);
             window.Perimeter = _calculator.CalculateRectanglePerimeter(createWindowDto.Height, createWindowDto.Width);
             window.SingleArea = _calculator.CalculateRectangleArea(createWindowDto.Height, createWindowDto.Width);
+
 
             await _dbContext.Windows.AddAsync(window);
             _dbContext.SaveChangesAsync();

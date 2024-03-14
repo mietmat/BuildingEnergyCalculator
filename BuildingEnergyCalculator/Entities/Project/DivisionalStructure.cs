@@ -1,7 +1,8 @@
 ﻿
 using System.ComponentModel.DataAnnotations.Schema;
+using BuildingEnergyCalculator.Entities.Library;
 
-namespace BuildingEnergyCalculator.Entities
+namespace BuildingEnergyCalculator.Entities.Project
 {
     public class DivisionalStructure
     {
