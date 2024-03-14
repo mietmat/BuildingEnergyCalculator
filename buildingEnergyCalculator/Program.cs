@@ -52,8 +52,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EnergyCalculatorDbContext>
-    //(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EnergyCalculatorDbConnection")));
-    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("EnergyCalculatorDbConnection2")));
+//(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EnergyCalculatorDbConnection")));
+(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EnergyCalculatorDbConnection2")));
 builder.Services.AddScoped<EnergyCalculatorSeeder>();
 builder.Services.AddScoped<IBuildingMaterialService, BuildingMaterialService>();
 builder.Services.AddScoped<IDivisionalStructureService, DivisionalStructureService>();
