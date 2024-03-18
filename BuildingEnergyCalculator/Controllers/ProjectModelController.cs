@@ -23,7 +23,7 @@ namespace BuildingEnergyCalculator.Controllers
         public async Task<ActionResult> Create([FromBody] CreateProjectModelDto dto)
         {
             var id = await _projectModelService.Create(dto);
-            return Created($"/api/buildinginformation/{id}", null);
+            return Created($"/api/project/{id}", null);
         }
 
         [HttpGet]

@@ -8,7 +8,7 @@ namespace BuildingEnergyCalculator.Services
         Task <IEnumerable<ProjectModelDto>> GetAll();
         Task <ProjectModelDto> GetById(int id);
         void Delete(int id);
-        void Update(UpdateProjectModelDto dto, int id);
+        Task Update(UpdateProjectModelDto dto, int id);
 
     }
 }

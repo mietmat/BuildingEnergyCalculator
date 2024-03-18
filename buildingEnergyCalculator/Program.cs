@@ -70,6 +70,7 @@ builder.Services.AddScoped<IWindowService, WindowService>();
 builder.Services.AddScoped<IFloorOnTheGroundService, FloorOnTheGroundService>();
 builder.Services.AddScoped<DataPreparer>();
 builder.Services.AddScoped<IProjectModelService, ProjectModelService>();
+builder.Services.AddScoped<ISolutionService, SolutionService>();
 builder.Services.AddHttpContextAccessor();
 
 
