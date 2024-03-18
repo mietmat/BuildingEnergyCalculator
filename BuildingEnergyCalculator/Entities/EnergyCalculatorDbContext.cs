@@ -26,6 +26,7 @@ namespace BuildingEnergyCalculator.Entities
         public DbSet<Address> Addresses { get; set; }
         public DbSet<BuildingObject> BuildingObjects { get; set; }
         public DbSet<ProjectModel> ProjectModels { get; set; }
+        public DbSet<Solution> Solutions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

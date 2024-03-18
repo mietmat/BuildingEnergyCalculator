@@ -14,15 +14,18 @@ namespace BuildingEnergyCalculator.Services
         private readonly EnergyCalculatorDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ICalculator _calculator;
+        private readonly DbContextOptions<EnergyCalculatorDbContext> _options;
 
         public ProjectModelService(
             EnergyCalculatorDbContext dbContext,
             IMapper mapper,
-            ICalculator calculator)
+            ICalculator calculator,
+            DbContextOptions<EnergyCalculatorDbContext> options)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _calculator = calculator;
+            _options = options;
         }
 
         public async Task<int> Create(CreateProjectModelDto dto)
@@ -64,10 +67,14 @@ namespace BuildingEnergyCalculator.Services
 
         public async Task<ProjectModelDto> GetById(int id)
         {
-            var existingProject = await _dbContext.ProjectModels                         
-                           .FirstOrDefaultAsync(x => x.Id == id);
+            var existingProject = new ProjectModel();
+            using (var context = new EnergyCalculatorDbContext(_options))
+            {
+                existingProject = await context.ProjectModels
+                         .FirstOrDefaultAsync(x => x.Id == id);
+            }
 
-            if (existingProject is null)
+            if (existingProject == null)
             {
                 throw new NotFoundException("Project not found.");
             }
@@ -77,17 +84,20 @@ namespace BuildingEnergyCalculator.Services
             return projectModelDto;
         }
 
-        public void Update(UpdateProjectModelDto dto, int id)
+        public async Task Update(UpdateProjectModelDto dto, int id)
         {
-            var project = _dbContext.ProjectModels.FirstOrDefault(x => x.Id == id);
-            if (project is null)
-                throw new NotFoundException("Project not found");
+            using (var context = new EnergyCalculatorDbContext(_options))
+            {
+                var project = await context.ProjectModels.FirstOrDefaultAsync(x => x.Id == id);
+                if (project is null)
+                    throw new NotFoundException("Project not found");
 
-            project.Id = id;
-            project.Name = dto.Name;         
+                project.Id = id;
+                project.Name = dto.Name;
 
+                await context.SaveChangesAsync();
+            }
 
-            _dbContext.SaveChanges();
         }
     }
 }
