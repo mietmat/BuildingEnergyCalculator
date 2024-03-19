@@ -26,15 +26,14 @@ namespace BuildingEnergyCalculator.Controllers
             return Created($"/api/solution/{id}", null);
         }
 
-        [HttpGet]
         [AllowAnonymous]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<SolutionDto>>> GetAll()
         {
             var solutionDtos = await _solutionService.GetAll();
             return Ok(solutionDtos);
         }
 
-        [HttpGet]
         [AllowAnonymous]
         [HttpGet("{projectId}/solutions")]
         public async Task<ActionResult<IEnumerable<SolutionDto>>> GetByProjectId([FromRoute] int projectId)
