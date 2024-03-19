@@ -4,7 +4,11 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Solution> Solutions { get; set; }
+        //public string Description { get; set; }
+        //public Address Address { get; set; }
+        //public Investor Investor { get; set; }
+
+        //public List<Solution> Solutions { get; set; }
         //public BuildingObject? BuildingObject { get; set; }
 
         //public Investor Investor { get; set; }
