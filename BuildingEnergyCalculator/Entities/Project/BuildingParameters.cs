@@ -6,6 +6,7 @@ namespace BuildingEnergyCalculator.Entities.Project
     public class BuildingParameters
     {
         public int Id { get; set; }
+        public int SolutionId { get; set; }
         //public string BuildingName { get; set; }
         //public string BuildingDescription { get; set; }
         public double BuildingLengthN { get; set; }
@@ -24,7 +25,7 @@ namespace BuildingEnergyCalculator.Entities.Project
         public double UnheatedAtticArea { get; set; }
         public double UsableAreaOfTheBuilding { get; set; }
         public double AtticUsableArea { get; set; }
-        public double PerimiterOfTheBuilding { get; set; }
+        public double PerimeterOfTheBuilding { get; set; }
         public double BalconyLength { get; set; }
         public double TotalWindowAreaN { get; set; }
         public double TotalWindowAreaE { get; set; }

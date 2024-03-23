@@ -2,6 +2,7 @@
 using BuildingEnergyCalculator.Entities;
 using BuildingEnergyCalculator.Entities.Project;
 using BuildingEnergyCalculator.Exceptions;
+using BuildingEnergyCalculator.Migrations;
 using BuildingEnergyCalculator.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,15 +12,19 @@ namespace BuildingEnergyCalculator.Services
     {
         private readonly EnergyCalculatorDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly DbContextOptions<EnergyCalculatorDbContext> _options;
 
-        public BuildingParametersService(EnergyCalculatorDbContext dbContext, IMapper mapper)
+
+        public BuildingParametersService(EnergyCalculatorDbContext dbContext, IMapper mapper, DbContextOptions<EnergyCalculatorDbContext> options)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _options = options;
         }
 
-        public async Task<int> Create(CreateBuildingParametersDto dto)
+        public async Task<int> Create(CreateBuildingParametersDto dto, int solutionId)
         {
+            dto.SolutionId = solutionId;
             var buildingParameters = _mapper.Map<BuildingParameters>(dto);
 
             await _dbContext.BuildingParameters.AddAsync(buildingParameters);
@@ -67,6 +72,21 @@ namespace BuildingEnergyCalculator.Services
 
             return existingBuildingParametersDto;
         }
+        public async Task<BuildingParametersDto> GetBySolutionId(int solutionId)
+        {
+            using (var context = new EnergyCalculatorDbContext(_options))
+            {
+                var existingBuildingParameters = await _dbContext.BuildingParameters.FirstOrDefaultAsync(x => x.SolutionId == solutionId);
+
+                //if (existingBuildingParameters is null)
+                //{
+                //    throw new NotFoundException($"Building parameters for solutionId = {solutionId} not found.");
+                //}
+
+                var existingBuildingParametersDto = _mapper.Map<BuildingParametersDto>(existingBuildingParameters);
+                return existingBuildingParametersDto;
+            }
+        }
 
         public void Update(UpdateBuildingParametersDto dto, int id)
         {
@@ -85,7 +105,7 @@ namespace BuildingEnergyCalculator.Services
             buildingParameters.CellarHeight = dto.CellarHeight;
             buildingParameters.Doors = dto.Doors;
             buildingParameters.HeatAtticArea = dto.HeatAtticArea;
-            buildingParameters.PerimiterOfTheBuilding = dto.PerimiterOfTheBuilding;
+            buildingParameters.PerimeterOfTheBuilding = dto.PerimeterOfTheBuilding;
             buildingParameters.StaircaseSurface = dto.StaircaseSurface;
             buildingParameters.StaircaseWidth = dto.StaircaseWidth;
             buildingParameters.StoreyHeightGross = dto.StoreyHeightGross;
@@ -99,7 +119,7 @@ namespace BuildingEnergyCalculator.Services
             buildingParameters.TotalWindowAreaN = dto.TotalWindowAreaN;
             buildingParameters.TotalWindowAreaS = dto.TotalWindowAreaS;
             buildingParameters.TotalWindowAreaW = dto.TotalWindowAreaW;
-            buildingParameters.PerimiterOfTheBuilding = dto.PerimiterOfTheBuilding;
+            buildingParameters.PerimeterOfTheBuilding = dto.PerimeterOfTheBuilding;
             buildingParameters.StaircaseSurface = dto.StaircaseSurface;
             buildingParameters.StaircaseWidth = dto.StaircaseWidth;
             buildingParameters.UnheatedAtticArea = dto.UnheatedAtticArea;
