@@ -15,10 +15,10 @@ namespace BuildingEnergyCalculator.Controllers
             _buildingParametersService = buildingParametersService;
         }
 
-        [HttpPost]
-        public ActionResult CreateBuildingParameters([FromBody] CreateBuildingParametersDto dto)
+        [HttpPost("{solutionId}")]
+        public ActionResult CreateBuildingParameters([FromBody] CreateBuildingParametersDto dto, [FromRoute] int solutionId)
         {
-            var id = _buildingParametersService.Create(dto);
+            var id = _buildingParametersService.Create(dto, solutionId);
             return Created($"/api/buildingparameters/{id}", null);
         }
 
@@ -29,10 +29,10 @@ namespace BuildingEnergyCalculator.Controllers
             return Ok(buildingParametersDtos);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<BuildingParametersDto> GetItem([FromRoute] int id)
+        [HttpGet("{solutionId}")]
+        public async Task<ActionResult<BuildingParametersDto>> GetBySolutionId([FromRoute] int solutionId)
         {
-            var buildingParameters = _buildingParametersService.GetById(id);
+            var buildingParameters = await _buildingParametersService.GetBySolutionId(solutionId);
 
             if (buildingParameters is null)
             {
@@ -41,6 +41,19 @@ namespace BuildingEnergyCalculator.Controllers
 
             return Ok(buildingParameters);
         }
+
+        //[HttpGet("{id}")]
+        //public ActionResult<BuildingParametersDto> GetItem([FromRoute] int id)
+        //{
+        //    var buildingParameters = _buildingParametersService.GetById(id);
+
+        //    if (buildingParameters is null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(buildingParameters);
+        //}
 
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
