@@ -88,46 +88,49 @@ namespace BuildingEnergyCalculator.Services
             }
         }
 
-        public void Update(UpdateBuildingParametersDto dto, int id)
+        public async Task Update(UpdateBuildingParametersDto dto, int solutionId)
         {
-            var buildingParameters = _dbContext.BuildingParameters.FirstOrDefault(x => x.Id == id);
-            if (buildingParameters is null)
-                throw new NotFoundException("Investment not found");
+            using (var context = new EnergyCalculatorDbContext(_options))
+            {
+                var buildingParameters = await context.BuildingParameters.FirstOrDefaultAsync(x => x.SolutionId == solutionId);
+                if (buildingParameters is null)
+                    throw new NotFoundException("Investment not found");
 
-            buildingParameters.Id = id;
-            buildingParameters.BalconyLength = dto.BalconyLength;
-            buildingParameters.BuildingArea = dto.BuildingArea;
-            buildingParameters.BuildingLengthE = dto.BuildingLengthE;
-            buildingParameters.BuildingLengthS = dto.BuildingLengthS;
-            buildingParameters.BuildingLengthW = dto.BuildingLengthW;
-            buildingParameters.BuildingLengthN = dto.BuildingLengthN;
-            buildingParameters.AtticUsableArea = dto.AtticUsableArea;
-            buildingParameters.CellarHeight = dto.CellarHeight;
-            buildingParameters.Doors = dto.Doors;
-            buildingParameters.HeatAtticArea = dto.HeatAtticArea;
-            buildingParameters.PerimeterOfTheBuilding = dto.PerimeterOfTheBuilding;
-            buildingParameters.StaircaseSurface = dto.StaircaseSurface;
-            buildingParameters.StaircaseWidth = dto.StaircaseWidth;
-            buildingParameters.StoreyHeightGross = dto.StoreyHeightGross;
-            buildingParameters.StoreyHeightNet = dto.StoreyHeightNet;
-            buildingParameters.StoreyQuantity = dto.StoreyQuantity;
-            buildingParameters.TotalDoorAreaE = dto.TotalDoorAreaE;
-            buildingParameters.TotalDoorAreaN = dto.TotalDoorAreaN;
-            buildingParameters.TotalDoorAreaS = dto.TotalDoorAreaS;
-            buildingParameters.TotalDoorAreaW = dto.TotalDoorAreaW;
-            buildingParameters.TotalWindowAreaE = dto.TotalWindowAreaE;
-            buildingParameters.TotalWindowAreaN = dto.TotalWindowAreaN;
-            buildingParameters.TotalWindowAreaS = dto.TotalWindowAreaS;
-            buildingParameters.TotalWindowAreaW = dto.TotalWindowAreaW;
-            buildingParameters.PerimeterOfTheBuilding = dto.PerimeterOfTheBuilding;
-            buildingParameters.StaircaseSurface = dto.StaircaseSurface;
-            buildingParameters.StaircaseWidth = dto.StaircaseWidth;
-            buildingParameters.UnheatedAtticArea = dto.UnheatedAtticArea;
-            buildingParameters.UsableAreaOfTheBuilding = dto.UsableAreaOfTheBuilding;
-            buildingParameters.UsableAreaOfTheStairCase = dto.UsableAreaOfTheStairCase;
-            buildingParameters.Windows = dto.Windows;
+                buildingParameters.BalconyLength = dto.BalconyLength;
+                buildingParameters.BuildingArea = dto.BuildingArea;
+                buildingParameters.BuildingLengthE = dto.BuildingLengthE;
+                buildingParameters.BuildingLengthS = dto.BuildingLengthS;
+                buildingParameters.BuildingLengthW = dto.BuildingLengthW;
+                buildingParameters.BuildingLengthN = dto.BuildingLengthN;
+                buildingParameters.AtticUsableArea = dto.AtticUsableArea;
+                buildingParameters.CellarHeight = dto.CellarHeight;
+                buildingParameters.HeatAtticArea = dto.HeatAtticArea;
+                buildingParameters.PerimeterOfTheBuilding = dto.PerimeterOfTheBuilding;
+                buildingParameters.StaircaseSurface = dto.StaircaseSurface;
+                buildingParameters.StaircaseWidth = dto.StaircaseWidth;
+                buildingParameters.StoreyHeightGross = dto.StoreyHeightGross;
+                buildingParameters.StoreyHeightNet = dto.StoreyHeightNet;
+                buildingParameters.StoreyQuantity = dto.StoreyQuantity;
+                buildingParameters.TotalDoorAreaE = dto.TotalDoorAreaE;
+                buildingParameters.TotalDoorAreaN = dto.TotalDoorAreaN;
+                buildingParameters.TotalDoorAreaS = dto.TotalDoorAreaS;
+                buildingParameters.TotalDoorAreaW = dto.TotalDoorAreaW;
+                buildingParameters.TotalWindowAreaE = dto.TotalWindowAreaE;
+                buildingParameters.TotalWindowAreaN = dto.TotalWindowAreaN;
+                buildingParameters.TotalWindowAreaS = dto.TotalWindowAreaS;
+                buildingParameters.TotalWindowAreaW = dto.TotalWindowAreaW;
+                buildingParameters.PerimeterOfTheBuilding = dto.PerimeterOfTheBuilding;
+                buildingParameters.StaircaseSurface = dto.StaircaseSurface;
+                buildingParameters.StaircaseWidth = dto.StaircaseWidth;
+                buildingParameters.UnheatedAtticArea = dto.UnheatedAtticArea;
+                buildingParameters.UsableAreaOfTheBuilding = dto.UsableAreaOfTheBuilding;
+                buildingParameters.UsableAreaOfTheStairCase = dto.UsableAreaOfTheStairCase;
 
-            _dbContext.SaveChanges();
+                await context.SaveChangesAsync();
+
+            }
+
+
         }
     }
 }
