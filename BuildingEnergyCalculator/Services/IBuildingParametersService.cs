@@ -9,6 +9,6 @@ namespace BuildingEnergyCalculator.Services
         Task<BuildingParametersDto> GetById(int id);
         Task<BuildingParametersDto> GetBySolutionId(int solutionId);
         void Delete(int id);
-        void Update(UpdateBuildingParametersDto dto, int id);
+        Task Update(UpdateBuildingParametersDto dto, int id);
     }
 }
