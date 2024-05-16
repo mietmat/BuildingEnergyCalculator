@@ -17,6 +17,7 @@ namespace BuildingEnergyCalculator.Models
         public double Cw { get; set; }
         public int DivisionalStructureId { get; set; }
         public double Thickness { get; set; }
+        public double Price { get; set; }
 
 
 
