@@ -13,6 +13,7 @@ namespace BuildingEnergyCalculator.Models
         public double R { get; set; }//ThermalResistance m2K/W
         public double Cw { get; set; }
         public double Thickness { get; set; }
+        public double Price { get; set; }
 
 
 

@@ -5,6 +5,7 @@ namespace BuildingEnergyCalculator.Models
     public class UpdateBuildingParametersDto
     {
         public int Id { get; set; }
+        public int SolutionId { get; set; }
         //public string BuildingName { get; set; }
         //public string BuildingDescription { get; set; }
         public double BuildingLengthN { get; set; }
@@ -23,7 +24,7 @@ namespace BuildingEnergyCalculator.Models
         public double UnheatedAtticArea { get; set; }
         public double UsableAreaOfTheBuilding { get; set; }
         public double AtticUsableArea { get; set; }
-        public double PerimiterOfTheBuilding { get; set; }
+        public double PerimeterOfTheBuilding { get; set; }
         public double BalconyLength { get; set; }
         public double TotalWindowAreaN { get; set; }
         public double TotalWindowAreaE { get; set; }
@@ -33,9 +34,9 @@ namespace BuildingEnergyCalculator.Models
         public double TotalDoorAreaE { get; set; }
         public double TotalDoorAreaS { get; set; }
         public double TotalDoorAreaW { get; set; }
-        public List<Window> Windows { get; set; }
-        public List<Door> Doors { get; set; }
-        public List<Window> WindowsZoneII { get; set; }
-        public List<Door> DoorsZoneII { get; set; }
+        //public List<Window> WindowsZoneI { get; set; }
+        //public List<Door> DoorsZoneI { get; set; }
+        //public List<Window> WindowsZoneII { get; set; }
+        //public List<Door> DoorsZoneII { get; set; }
     }
 }

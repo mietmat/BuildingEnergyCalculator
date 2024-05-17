@@ -114,23 +114,32 @@ namespace BuildingEnergyCalculator.Services
 
         public void Update(UpdateDivisionalStructureDto dto, int id)
         {
-            var divisionalStructure = _dbContext.DivisionalStructures.FirstOrDefault(x => x.Id == id);
+            var divisionalStructure = _dbContext.DivisionalStructures.Include(ds => ds.BuildingMaterials).FirstOrDefault(x => x.Id == id); 
             if (divisionalStructure is null)
                 throw new NotFoundException("Material not found");
 
             var divisionalStructureEntity = _mapper.Map<DivisionalStructure>(dto);
 
-            divisionalStructure.Id = id;
             divisionalStructure.Name = divisionalStructureEntity.Name;
             divisionalStructure.Description = divisionalStructureEntity.Description;
             divisionalStructure.Rsi = divisionalStructureEntity.Rsi;
             divisionalStructure.Rse = divisionalStructureEntity.Rse;
 
-            
+
             var thicknessesList = _dataPreparer.CalculateTotalThicknessForDivisionalStructure(dto.BuildingMaterials);
             var totalThickness = _calculator.CalculateTotalThickness(thicknessesList);
-
             divisionalStructure.DivisionalThickness = totalThickness;
+
+            divisionalStructure.BuildingMaterials.Clear();
+
+            foreach (var materialDto in dto.BuildingMaterials)
+            {
+                var material = _dbContext.BuildingMaterials.FirstOrDefault(m => m.Id == materialDto.Id);
+                if (material != null)
+                {
+                    divisionalStructure.BuildingMaterials.Add(material);
+                }
+            }
             _dbContext.SaveChanges();
         }
     }

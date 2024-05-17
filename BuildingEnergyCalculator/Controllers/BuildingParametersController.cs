@@ -15,24 +15,32 @@ namespace BuildingEnergyCalculator.Controllers
             _buildingParametersService = buildingParametersService;
         }
 
-        [HttpPost]
-        public ActionResult CreateBuildingParameters([FromBody] CreateBuildingParametersDto dto)
+        [HttpPost("{solutionId}")]
+        public ActionResult CreateBuildingParameters([FromBody] CreateBuildingParametersDto dto, [FromRoute] int solutionId)
         {
-            var id = _buildingParametersService.Create(dto);
+            var id = _buildingParametersService.Create(dto, solutionId);
             return Created($"/api/buildingparameters/{id}", null);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<BuildingParametersDto>>> GetAll()
+        [HttpPut("{solutionId}")]
+        public ActionResult Update([FromBody] UpdateBuildingParametersDto dto, [FromRoute] int solutionId)
         {
-            var buildingParametersDtos = await _buildingParametersService.GetAll();
-            return Ok(buildingParametersDtos);
-        }
+            var existingBuildingParameters = _buildingParametersService.GetBySolutionId(solutionId);
 
-        [HttpGet("{id}")]
-        public ActionResult<BuildingParametersDto> GetItem([FromRoute] int id)
+            if (existingBuildingParameters is null)
+            {
+                return NotFound();
+            }
+
+            _buildingParametersService.Update(dto, solutionId);
+
+            return Ok();
+        }   
+
+        [HttpGet("{solutionId}")]
+        public async Task<ActionResult<BuildingParametersDto>> GetBySolutionId([FromRoute] int solutionId)
         {
-            var buildingParameters = _buildingParametersService.GetById(id);
+            var buildingParameters = await _buildingParametersService.GetBySolutionId(solutionId);
 
             if (buildingParameters is null)
             {
@@ -42,27 +50,12 @@ namespace BuildingEnergyCalculator.Controllers
             return Ok(buildingParameters);
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BuildingParametersDto>>> GetAll()
         {
-            _buildingParametersService.Delete(id);
-            return NoContent();
+            var buildingParametersDtos = await _buildingParametersService.GetAll();
+            return Ok(buildingParametersDtos);
         }
 
-        [HttpPut("{id}")]
-        public ActionResult Update([FromBody] UpdateBuildingParametersDto dto, [FromRoute] int id)
-        {
-            var existingBuildingParameters = _buildingParametersService.GetById(id);
-
-
-            if (existingBuildingParameters is null)
-            {
-                return NotFound();
-            }
-
-            _buildingParametersService.Update(dto, id);
-
-            return Ok();
-        }
     }
 }

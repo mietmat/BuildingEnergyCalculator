@@ -77,6 +77,7 @@ namespace BuildingEnergyCalculator.Services
             buildingMaterial.LambdaW = dto.LambdaW;
             buildingMaterial.Ro = dto.Ro;
             buildingMaterial.Thickness = dto.Thickness;
+            buildingMaterial.Price = dto.Price;
 
             _dbContext.SaveChanges();
             var buildingMaterialDto = _mapper.Map<BuildingMaterialDto>(buildingMaterial);
