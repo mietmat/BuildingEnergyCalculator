@@ -36,20 +36,187 @@ namespace BuildingEnergyCalculator
                     _dbContext.SaveChanges();
                 }
 
-                if (!_dbContext.BuildingMaterials.Any()) // sprawdzenie czy nie ma żadnego wiersza
+                if (!_dbContext.BuildingMaterials.Any())
                 {
                     var buildingMaterials = GetBuildingMaterials();
                     _dbContext.BuildingMaterials.AddRange(buildingMaterials);
                     _dbContext.SaveChanges();
                 }
 
-                if (!_dbContext.BuildingInformation.Any()) // sprawdzenie czy nie ma żadnego wiersza
+                if (!_dbContext.BuildingInformation.Any())
                 {
                     var buildingInformations = GetBuildingInformations();
                     _dbContext.BuildingInformation.AddRange(buildingInformations);
                     _dbContext.SaveChanges();
                 }
+                if (!_dbContext.KNRs.Any())
+                {
+                    var KNRs = GetKNRs();
+                    _dbContext.KNRs.AddRange(KNRs);
+                    _dbContext.SaveChanges();
+                }
             }
+        }
+
+        private IEnumerable<KNR> GetKNRs()
+        {
+            var knrs = new List<KNR>()
+            {
+                new KNR
+                {
+                    KNRName = "Budowle i roboty ziemne",
+                    KNRNo = "KNR 2-01",
+                    TableNo = "0221",
+                    Topic = "WYKOPY JAMISTE WYKONYWANE KOPARKAMI PODSIĘBIERNYMI NA ODKŁAD",
+                    OccupationList = new List<Occupation>
+                    {
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 9.1,
+                            ColumnNo = "01",
+                            Description = "Koparka podsiębierna 0,15m3, kategoria gruntu I-II"
+                        },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 12.4,
+                            ColumnNo = "02",
+                            Description = "Koparka podsiębierna 0,15m3, kategoria gruntu III"
+
+                        },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 9.1,
+                            ColumnNo = "03",
+                            Description = "Koparka podsiębierna 0,25m3, kategoria gruntu I-II"
+                                                    },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 11.24,
+                            ColumnNo = "04",
+                            Description = "Koparka podsiębierna 0,25m3, kategoria gruntu III"
+                        },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 6.00,
+                            ColumnNo = "05",
+                            Description = "Koparka podsiębierna 0,40m3, kategoria gruntu I-II"
+                                                    },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 8.9,
+                            ColumnNo = "06",
+                            Description = "Koparka podsiębierna 0,40m3, kategoria gruntu III"
+                        },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 6.00,
+                            ColumnNo = "07",
+                            Description = "Koparka podsiębierna 0,60m3, kategoria gruntu I-II"
+                                                    },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 8.9,
+                            ColumnNo = "08",
+                            Description = "Koparka podsiębierna 0,60m3, kategoria gruntu III"
+                        },
+                        new Occupation
+                        {
+                            Name = "Robotnicy - grupa I",
+                            WorkLoad = 9.4,
+                            ColumnNo = "09",
+                            Description = "Koparka podsiębierna 0,60m3, kategoria gruntu IV"
+                        }
+
+                    },
+                    MachineList = new List<KNRMachine>
+                    {
+                        new KNRMachine
+                        {
+                            Name = "Koparka 0,15m3 na podwoziu ciągnika kołowego",
+                            WorkLoad = 7.25,
+                            ColumnNo = "01",
+                            Description = "Koparka podsiębierna 0,15m3, kategoria gruntu I-II"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka 0,15m3 na podwoziu ciągnika kołowego",
+                            WorkLoad = 9.24,
+                            ColumnNo = "02",
+                            Description = "Koparka podsiębierna 0,15m3, kategoria gruntu III"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka gąsiennicowa 0,25m3",
+                            WorkLoad = 5.98,
+                            ColumnNo = "03",
+                            Description = "Koparka podsiębierna 0,25m3, kategoria gruntu I-II"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka gąsiennicowa 0,25m3",
+                            WorkLoad = 7.82,
+                            ColumnNo = "04",
+                            Description = "Koparka podsiębierna 0,25m3, kategoria gruntu III"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka gąsiennicowa 0,40m3",
+                            WorkLoad = 4.56,
+                            ColumnNo = "05",
+                            Description = "Koparka podsiębierna 0,40m3, kategoria gruntu I-II"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka gąsiennicowa 0,40m3",
+                            WorkLoad = 5.95,
+                            ColumnNo = "06",
+                            Description = "Koparka podsiębierna 0,40m3, kategoria gruntu III"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka gąsiennicowa 0,60m3",
+                            WorkLoad = 4.04,
+                            ColumnNo = "07",
+                            Description = "Koparka podsiębierna 0,60m3, kategoria gruntu I-II"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka gąsiennicowa 0,60m3",
+                            WorkLoad = 4.72,
+                            ColumnNo = "08",
+                            Description = "Koparka podsiębierna 0,60m3, kategoria gruntu III"
+                        },
+                        new KNRMachine
+                        {
+                            Name = "Koparka gąsiennicowa 0,60m3",
+                            WorkLoad = 5.64,
+                            ColumnNo = "09",
+                            Description = "Koparka podsiębierna 0,60m3, kategoria gruntu IV"
+                        }
+                    },
+                    LaborList = new List<Labor>
+                    {
+                        new Labor
+                        {
+                            Description = "1. Odspojenie gruntu koparką ze złożeniem urobku na odkład bezpośrednio przy wykopie."
+                        },
+                        new Labor
+                        {
+                            Description = "2. Ręczne zsuwanie odspojonych brył gruntu ze skarpy pod koparkę oraz wyrównanie dna wykopu."
+                        }
+                    }
+                }
+            };
+            return knrs;
+
         }
 
         private IEnumerable<Role> GetRoles()

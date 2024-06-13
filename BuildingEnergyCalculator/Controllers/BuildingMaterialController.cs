@@ -1,7 +1,5 @@
-﻿using BuildingEnergyCalculator.Entities;
-using BuildingEnergyCalculator.Models;
+﻿using BuildingEnergyCalculator.Models;
 using BuildingEnergyCalculator.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuildingEnergyCalculator.Controllers
